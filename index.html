@@ -1991,7 +1991,6 @@
         // Handle form submissions with AJAX (no page refresh)
         document.addEventListener('DOMContentLoaded', function() {
             const forms = document.querySelectorAll('form[data-netlify="true"]');
-            console.log('Forms found:', forms.length); // Debug: should be 2
             
             // Check if we're running locally
             const isLocal = window.location.protocol === 'file:' || 
@@ -1999,7 +1998,6 @@
                            window.location.hostname === '127.0.0.1';
             
             forms.forEach((form, index) => {
-                console.log(`Setting up form ${index + 1}:`, form.name); // Debug
                 form.addEventListener('submit', function(e) {
                     e.preventDefault(); // CRITICAL: Prevents page refresh
                     
@@ -2020,8 +2018,7 @@
                     
                     if (isLocal) {
                         // LOCAL TESTING: Simulate success
-                        console.log(`Local test - Form: ${form.name}, Email captured: ${emailValue}`);
-                        alert(`Test Mode: Email "${emailValue}" would be saved to Netlify Forms when deployed`);
+                        console.log(`Local test - Form: ${form.name}, Email: ${emailValue}`);
                         
                         setTimeout(() => {
                             // Simulate success
@@ -2050,10 +2047,13 @@
                         }, 1000);
                     } else {
                         // PRODUCTION: Submit to Netlify Forms
+                        const formData = new FormData(form);
+                        formData.append('form-name', form.getAttribute('name'));
+                        
                         fetch('/', {
                             method: 'POST',
                             headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                            body: new URLSearchParams(new FormData(form)).toString()
+                            body: new URLSearchParams(formData).toString()
                         })
                         .then(response => {
                             if (response.ok) {
