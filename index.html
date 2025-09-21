@@ -1425,15 +1425,15 @@
     </style>
 </head>
 <body>
-    <!-- Hidden forms for Netlify detection -->
-    <form name="waitlist" netlify netlify-honeypot="bot-field" hidden>
-        <input type="email" name="email" />
+    <!-- Hidden forms for Netlify detection - must match visible forms exactly -->
+    <form name="waitlist" data-netlify="true" netlify-honeypot="bot-field" hidden>
         <input type="text" name="bot-field" />
+        <input type="email" name="email" />
     </form>
     
-    <form name="waitlist-cta" netlify netlify-honeypot="bot-field-cta" hidden>
-        <input type="email" name="email" />
+    <form name="waitlist-cta" data-netlify="true" netlify-honeypot="bot-field-cta" hidden>
         <input type="text" name="bot-field-cta" />
+        <input type="email" name="email" />
     </form>
     
     <!-- Splash Screen Video -->
@@ -1503,7 +1503,7 @@
                 </p>
 
                 <!-- Netlify Form with data-netlify attribute -->
-                <form class="waitlist-form" name="waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                <form class="waitlist-form" name="waitlist" action="/success" method="POST" data-netlify="true" netlify-honeypot="bot-field">
                     <input type="hidden" name="form-name" value="waitlist">
                     <p style="display:none;">
                         <label>Don't fill this out: <input name="bot-field"></label>
@@ -1911,7 +1911,7 @@
                 Perfect for companies shipping internationally 5-10 times per year.
             </p>
             
-            <form class="waitlist-form" name="waitlist-cta" method="POST" data-netlify="true" netlify-honeypot="bot-field-cta" style="max-width: 500px; margin: 0 auto;">
+            <form class="waitlist-form" name="waitlist-cta" action="/success" method="POST" data-netlify="true" netlify-honeypot="bot-field-cta" style="max-width: 500px; margin: 0 auto;">
                 <input type="hidden" name="form-name" value="waitlist-cta">
                 <p style="display:none;">
                     <label>Don't fill this out: <input name="bot-field-cta"></label>
