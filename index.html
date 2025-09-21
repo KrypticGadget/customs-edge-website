@@ -241,17 +241,75 @@
             justify-content: center;
             padding: 120px 40px 80px;
             position: relative;
-            background-image: url('assets/logos/backgrounds/hero-bg-desktop.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             background-attachment: fixed;
+            /* Default: Standard Desktop */
+            background-image: url('assets/logos/backgrounds/Final/hero-bg-desktop.png');
         }
         
-        @media (max-width: 768px) {
+        /* 2K/4K Displays - Ultra High Resolution */
+        @media (min-width: 2560px) {
             .hero {
-                background-image: url('assets/logos/backgrounds/hero-bg-mobile.png');
+                background-image: url('assets/logos/backgrounds/Final/hero-bg-desktop-2k.png');
+            }
+        }
+        
+        /* Standard Desktop - Full HD */
+        @media (min-width: 1920px) and (max-width: 2559px) {
+            .hero {
+                background-image: url('assets/logos/backgrounds/Final/hero-bg-desktop.png');
+            }
+        }
+        
+        /* Laptop Displays */
+        @media (min-width: 1024px) and (max-width: 1919px) {
+            .hero {
+                background-image: url('assets/logos/backgrounds/Final/hero-bg-desktop-laptop.png');
+            }
+        }
+        
+        /* Tablet Displays */
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .hero {
+                background-image: url('assets/logos/backgrounds/Final/hero-bg-mobile-tablet.png');
                 background-attachment: scroll;
+            }
+        }
+        
+        /* Mobile Landscape - Horizontal Orientation */
+        @media (min-width: 568px) and (max-width: 767px) and (orientation: landscape) {
+            .hero {
+                background-image: url('assets/logos/backgrounds/Final/hero-bg-mobile-landscape.png');
+                background-attachment: scroll;
+                min-height: 100vh;
+            }
+        }
+        
+        /* iPhone/Standard Mobile Screens */
+        @media (min-width: 375px) and (max-width: 567px) {
+            .hero {
+                background-image: url('assets/logos/backgrounds/Final/hero-bg-mobile-iphone.png');
+                background-attachment: scroll;
+            }
+        }
+        
+        /* Small Mobile/Default Mobile */
+        @media (max-width: 374px) {
+            .hero {
+                background-image: url('assets/logos/backgrounds/Final/hero-bg-mobile.png');
+                background-attachment: scroll;
+            }
+        }
+        
+        /* High DPI/Retina Display Support */
+        @media (-webkit-min-device-pixel-ratio: 2), 
+               (min-resolution: 192dpi) {
+            @media (min-width: 1920px) {
+                .hero {
+                    background-image: url('assets/logos/backgrounds/Final/hero-bg-desktop-2k.png');
+                }
             }
         }
         
@@ -1010,6 +1068,16 @@
             height: 200%;
             background: radial-gradient(circle, rgba(99, 102, 241, 0.05) 0%, transparent 70%);
             animation: rotate 20s linear infinite;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .cta-container form {
+            position: relative;
+            z-index: 1;
+        }
+        .cta-container .roi-highlight {
+            position: relative;
+            z-index: 1;
         }
 
         @keyframes rotate {
@@ -1844,6 +1912,10 @@
                 </button>
             </form>
             
+            <div id="success-message-cta" class="success-message">
+                🎉 Welcome! We'll contact you soon about early access for intermittent shippers.
+            </div>
+            
             <div class="roi-highlight">
                 <span>💰</span>
                 <span>3.6x ROI Year 1 • 5x+ Ongoing • 2-Week Implementation</span>
@@ -1916,31 +1988,117 @@
     </div> <!-- End main-content -->
 
     <script>
-        // Handle form submissions with better UX
+        // Handle form submissions with AJAX (no page refresh)
         document.addEventListener('DOMContentLoaded', function() {
             const forms = document.querySelectorAll('form[data-netlify="true"]');
+            console.log('Forms found:', forms.length); // Debug: should be 2
             
-            forms.forEach(form => {
+            // Check if we're running locally
+            const isLocal = window.location.protocol === 'file:' || 
+                           window.location.hostname === 'localhost' || 
+                           window.location.hostname === '127.0.0.1';
+            
+            forms.forEach((form, index) => {
+                console.log(`Setting up form ${index + 1}:`, form.name); // Debug
                 form.addEventListener('submit', function(e) {
+                    e.preventDefault(); // CRITICAL: Prevents page refresh
+                    
                     const btn = form.querySelector('.submit-btn');
-                    const successMsg = document.getElementById('success-message');
+                    const btnText = btn.querySelector('.btn-text');
+                    const emailInput = form.querySelector('input[type="email"]');
+                    const emailValue = emailInput ? emailInput.value : '';
                     
-                    // Add loading state
+                    // Get the correct success message for each form
+                    const successMsg = form.name === 'waitlist' 
+                        ? document.getElementById('success-message') 
+                        : document.getElementById('success-message-cta');
+                    
+                    // Visual feedback
+                    btn.disabled = true;
                     btn.classList.add('loading');
+                    if (btnText) btnText.textContent = 'Sending...';
                     
-                    // Show success message after form processes (Netlify handles the actual submission)
-                    setTimeout(() => {
-                        btn.classList.remove('loading');
-                        if (successMsg && form.name === 'waitlist') {
-                            successMsg.classList.add('show');
+                    if (isLocal) {
+                        // LOCAL TESTING: Simulate success
+                        console.log(`Local test - Form: ${form.name}, Email captured: ${emailValue}`);
+                        alert(`Test Mode: Email "${emailValue}" would be saved to Netlify Forms when deployed`);
+                        
+                        setTimeout(() => {
+                            // Simulate success
+                            btn.classList.remove('loading');
+                            if (btnText) btnText.textContent = '✓ Success!';
+                            
+                            // Show success message for both forms
+                            if (successMsg) {
+                                successMsg.classList.add('show');
+                            }
+                            
+                            // Reset form
                             form.reset();
                             
-                            // Hide success message after 5 seconds
+                            // Reset button after 3 seconds
                             setTimeout(() => {
-                                successMsg.classList.remove('show');
-                            }, 5000);
-                        }
-                    }, 1500);
+                                btn.disabled = false;
+                                if (btnText) {
+                                    btnText.textContent = form.name === 'waitlist' ? 
+                                        'Join the Waitlist' : 'Get Early Access';
+                                }
+                                if (successMsg) {
+                                    successMsg.classList.remove('show');
+                                }
+                            }, 3000);
+                        }, 1000);
+                    } else {
+                        // PRODUCTION: Submit to Netlify Forms
+                        fetch('/', {
+                            method: 'POST',
+                            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                            body: new URLSearchParams(new FormData(form)).toString()
+                        })
+                        .then(response => {
+                            if (response.ok) {
+                                // Success
+                                btn.classList.remove('loading');
+                                if (btnText) btnText.textContent = '✓ Success!';
+                                
+                                // Show success message for both forms
+                                if (successMsg) {
+                                    successMsg.classList.add('show');
+                                }
+                                
+                                // Reset form
+                                form.reset();
+                                
+                                // Reset button after 3 seconds
+                                setTimeout(() => {
+                                    btn.disabled = false;
+                                    if (btnText) {
+                                        btnText.textContent = form.name === 'waitlist' ? 
+                                            'Join the Waitlist' : 'Get Early Access';
+                                    }
+                                    if (successMsg) {
+                                        successMsg.classList.remove('show');
+                                    }
+                                }, 3000);
+                            } else {
+                                throw new Error('Submission failed');
+                            }
+                        })
+                        .catch(error => {
+                            // Error handling
+                            console.error('Error:', error);
+                            btn.disabled = false;
+                            btn.classList.remove('loading');
+                            if (btnText) btnText.textContent = 'Error - Try Again';
+                            
+                            setTimeout(() => {
+                                if (btnText) {
+                                    btnText.textContent = form.name === 'waitlist' ? 
+                                        'Join the Waitlist' : 'Get Early Access';
+                                }
+                            }, 3000);
+                        });
+                    }
                 });
             });
 
