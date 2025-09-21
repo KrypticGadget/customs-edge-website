@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asset Viewer - Customs Edge Assets</title>
+    <!-- jsPDF library for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --primary-light: #8b5cf6;
+            --secondary: #0ea5e9;
+            --accent: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --dark: #1f2937;
+            --text-dark: #111827;
+            --text-gray: #6b7280;
+            --light: #ffffff;
+            --light-gray: #f3f4f6;
+            --border: #e5e7eb;
+            --gradient-brand: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-bottom: 1px solid #334155;
+            padding: 24px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            background: var(--gradient-brand);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .asset-stats {
+            display: flex;
+            gap: 30px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Controls */
+        .controls {
+            background: #1e293b;
+            border-bottom: 1px solid #334155;
+            padding: 20px 40px;
+            position: sticky;
+            top: 89px;
+            z-index: 99;
+        }
+
+        .controls-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px 12px 45px;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 10px;
+            color: #e2e8f0;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #64748b;
+        }
+
+        /* Category Tabs */
+        .category-tabs {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 8px 16px;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            color: #94a3b8;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .tab:hover {
+            border-color: #475569;
+            color: #cbd5e1;
+        }
+
+        .tab.active {
+            background: var(--gradient-brand);
+            border-color: transparent;
+            color: white;
+        }
+
+        .tab-count {
+            display: inline-block;
+            margin-left: 8px;
+            padding: 2px 6px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Asset Grid */
+        .asset-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 30px;
+        }
+
+        .asset-card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .asset-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
+        }
+
+        .asset-preview {
+            width: 100%;
+            height: 200px;
+            background: #0f172a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .asset-preview img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+
+        .asset-preview video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(99, 102, 241, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            pointer-events: none;
+        }
+
+        .asset-info {
+            padding: 16px;
+        }
+
+        .asset-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #e2e8f0;
+            margin-bottom: 8px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .asset-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .asset-type {
+            display: inline-block;
+            padding: 4px 8px;
+            background: rgba(99, 102, 241, 0.2);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 4px;
+            font-size: 11px;
+            color: var(--primary);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .asset-size {
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        .asset-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 8px;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 6px;
+            color: #94a3b8;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .action-btn:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .lightbox-info {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px 30px;
+            border-radius: 10px;
+            color: white;
+            text-align: center;
+        }
+
+        /* Category Section Headers */
+        .category-header {
+            margin: 40px 0 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #334155;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .category-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .category-count {
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--gradient-brand);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: var(--shadow-lg);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 60px;
+            font-size: 18px;
+            color: #64748b;
+        }
+
+        /* Export Button */
+        .export-btn {
+            padding: 10px 20px;
+            background: var(--gradient-brand);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .export-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .export-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 20px;
+            }
+
+            .controls {
+                padding: 15px 20px;
+                top: 76px;
+            }
+
+            .main-content {
+                padding: 20px;
+            }
+
+            .asset-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 15px;
+            }
+
+            .asset-stats {
+                display: none;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <h1>Customs Edge Assets</h1>
+            </div>
+            <div class="asset-stats">
+                <div class="stat">
+                    <div class="stat-value" id="total-assets">0</div>
+                    <div class="stat-label">Total Assets</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="total-size">0 MB</div>
+                    <div class="stat-label">Total Size</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="categories">0</div>
+                    <div class="stat-label">Categories</div>
+                </div>
+            </div>
+            <button class="export-btn" id="export-pdf" onclick="exportToPDF()">
+                📄 Export All to PDF
+            </button>
+        </div>
+    </header>
+
+    <!-- Controls -->
+    <div class="controls">
+        <div class="controls-inner">
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="search" placeholder="Search assets by name or type...">
+            </div>
+            <div class="category-tabs" id="category-tabs">
+                <div class="tab active" data-category="all">
+                    All <span class="tab-count">0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div id="asset-container">
+            <div class="loading">Loading assets...</div>
+        </div>
+    </main>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <div class="lightbox-content" id="lightbox-content"></div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // Asset data structure
+        const assets = {
+            'Favicons': [
+                { name: 'apple-touch-icon.png', path: 'logos/favicon/apple-touch-icon.png', type: 'PNG', size: '8.2 KB' },
+                { name: 'favicon-192x192.png', path: 'logos/favicon/favicon-192x192.png', type: 'PNG', size: '5.4 KB' },
+                { name: 'favicon-32x32.png', path: 'logos/favicon/favicon-32x32.png', type: 'PNG', size: '1.2 KB' },
+                { name: 'favicon.ico', path: 'logos/favicon/favicon.ico', type: 'ICO', size: '15.1 KB' },
+                { name: 'site.webmanifest', path: 'logos/favicon/site.webmanifest', type: 'MANIFEST', size: '0.3 KB' }
+            ],
+            'Original Logos': [
+                { name: 'abstract-mark.png', path: 'logos/original/abstract-mark.png', type: 'PNG', size: '42.3 KB' },
+                { name: 'app-icon.png', path: 'logos/original/app-icon.png', type: 'PNG', size: '38.7 KB' },
+                { name: 'ce-monogram-dark.png', path: 'logos/original/ce-monogram-dark.png', type: 'PNG', size: '25.6 KB' },
+                { name: 'ce-monogram-primary.png', path: 'logos/original/ce-monogram-primary.png', type: 'PNG', size: '24.9 KB' },
+                { name: 'dashboard-logo.png', path: 'logos/original/dashboard-logo.png', type: 'PNG', size: '31.2 KB' },
+                { name: 'emblem-badge.png', path: 'logos/original/emblem-badge.png', type: 'PNG', size: '45.8 KB' },
+                { name: 'favicon-source.png', path: 'logos/original/favicon-source.png', type: 'PNG', size: '12.4 KB' },
+                { name: 'logo-horizontal-dark.png', path: 'logos/original/logo-horizontal-dark.png', type: 'PNG', size: '28.9 KB' },
+                { name: 'logo-horizontal-light.png', path: 'logos/original/logo-horizontal-light.png', type: 'PNG', size: '27.3 KB' }
+            ],
+            'Social Media': [
+                { name: 'og-image.png', path: 'logos/social/og-image.png', type: 'PNG', size: '125.6 KB' },
+                { name: 'social-square.png', path: 'logos/social/social-square.png', type: 'PNG', size: '98.4 KB' }
+            ],
+            'SVG Assets': [
+                { name: 'horizontal_dark-embedded.svg', path: 'logos/svg/horizontal_dark-embedded.svg', type: 'SVG', size: '4.2 KB' },
+                { name: 'horizontal_light-embedded.svg', path: 'logos/svg/horizontal_light-embedded.svg', type: 'SVG', size: '4.1 KB' },
+                { name: 'logo-horizontal-simple.svg', path: 'logos/svg/logo-horizontal-simple.svg', type: 'SVG', size: '3.8 KB' },
+                { name: 'monogram-simple.svg', path: 'logos/svg/monogram-simple.svg', type: 'SVG', size: '2.1 KB' },
+                { name: 'monogram-traced.svg', path: 'logos/svg/monogram-traced.svg', type: 'SVG', size: '5.6 KB' },
+                { name: 'monogram_dark-embedded.svg', path: 'logos/svg/monogram_dark-embedded.svg', type: 'SVG', size: '3.3 KB' },
+                { name: 'monogram_primary-embedded.svg', path: 'logos/svg/monogram_primary-embedded.svg', type: 'SVG', size: '3.2 KB' }
+            ],
+            'Web Optimized': [
+                { name: 'logo-header.png', path: 'logos/web/optimized/logo-header.png', type: 'PNG', size: '8.4 KB' },
+                { name: 'logo-header-2x.png', path: 'logos/web/optimized/logo-header-2x.png', type: 'PNG', size: '18.7 KB' },
+                { name: 'logo-header-dark.png', path: 'logos/web/optimized/logo-header-dark.png', type: 'PNG', size: '8.9 KB' },
+                { name: 'logo-header-dark-2x.png', path: 'logos/web/optimized/logo-header-dark-2x.png', type: 'PNG', size: '19.3 KB' },
+                { name: 'monogram.png', path: 'logos/web/optimized/monogram.png', type: 'PNG', size: '4.2 KB' },
+                { name: 'monogram-2x.png', path: 'logos/web/optimized/monogram-2x.png', type: 'PNG', size: '9.8 KB' },
+                { name: 'monogram-dark.png', path: 'logos/web/optimized/monogram-dark.png', type: 'PNG', size: '4.5 KB' },
+                { name: 'monogram-dark-2x.png', path: 'logos/web/optimized/monogram-dark-2x.png', type: 'PNG', size: '10.2 KB' }
+            ],
+            'Video Assets': [
+                { name: 'splash-entry.mp4', path: 'video/splash-entry.mp4', type: 'MP4', size: '627 KB' },
+                { name: 'splash-entry-mobile-portrait.mp4', path: 'video/splash-entry-mobile-portrait.mp4', type: 'MP4', size: '485 KB' },
+                { name: 'splash-entry-mobile-landscape.mp4', path: 'video/splash-entry-mobile-landscape.mp4', type: 'MP4', size: '512 KB' },
+                { name: 'splash-entry-mobile-square.mp4', path: 'video/splash-entry-mobile-square.mp4', type: 'MP4', size: '498 KB' }
+            ],
+            'Backgrounds': [
+                { name: 'hero-bg-desktop.png', path: 'logos/backgrounds/hero-bg-desktop.png', type: 'PNG', size: '285 KB' },
+                { name: 'hero-bg-mobile.png', path: 'logos/backgrounds/hero-bg-mobile.png', type: 'PNG', size: '285 KB' }
+            ]
+        };
+
+        let currentCategory = 'all';
+        let searchTerm = '';
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            updateStats();
+            createCategoryTabs();
+            renderAssets();
+            setupEventListeners();
+        });
+
+        // Update statistics
+        function updateStats() {
+            let totalAssets = 0;
+            let totalSize = 0;
+            let categories = Object.keys(assets).length;
+
+            for (const category in assets) {
+                totalAssets += assets[category].length;
+                assets[category].forEach(asset => {
+                    const sizeStr = asset.size;
+                    const sizeNum = parseFloat(sizeStr);
+                    if (sizeStr.includes('KB')) {
+                        totalSize += sizeNum / 1024;
+                    } else if (sizeStr.includes('MB')) {
+                        totalSize += sizeNum;
+                    }
+                });
+            }
+
+            document.getElementById('total-assets').textContent = totalAssets;
+            document.getElementById('total-size').textContent = totalSize.toFixed(1) + ' MB';
+            document.getElementById('categories').textContent = categories;
+        }
+
+        // Create category tabs
+        function createCategoryTabs() {
+            const tabsContainer = document.getElementById('category-tabs');
+            let totalCount = 0;
+
+            for (const category in assets) {
+                totalCount += assets[category].length;
+            }
+
+            // Update "All" tab count
+            tabsContainer.querySelector('[data-category="all"] .tab-count').textContent = totalCount;
+
+            // Create tabs for each category
+            for (const category in assets) {
+                const tab = document.createElement('div');
+                tab.className = 'tab';
+                tab.dataset.category = category;
+                tab.innerHTML = `${category} <span class="tab-count">${assets[category].length}</span>`;
+                tab.onclick = () => selectCategory(category);
+                tabsContainer.appendChild(tab);
+            }
+        }
+
+        // Select category
+        function selectCategory(category) {
+            currentCategory = category;
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.dataset.category === category) {
+                    tab.classList.add('active');
+                }
+            });
+            renderAssets();
+        }
+
+        // Render assets
+        function renderAssets() {
+            const container = document.getElementById('asset-container');
+            container.innerHTML = '';
+
+            let assetsToRender = [];
+
+            if (currentCategory === 'all') {
+                for (const category in assets) {
+                    const categoryAssets = assets[category].filter(asset => 
+                        asset.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                        asset.type.toLowerCase().includes(searchTerm.toLowerCase())
+                    );
+                    
+                    if (categoryAssets.length > 0) {
+                        container.innerHTML += `
+                            <div class="category-header">
+                                <div class="category-title">${category}</div>
+                                <div class="category-count">${categoryAssets.length} items</div>
+                            </div>
+                            <div class="asset-grid" id="grid-${category.replace(/\s/g, '-')}"></div>
+                        `;
+                        
+                        setTimeout(() => {
+                            const grid = document.getElementById(`grid-${category.replace(/\s/g, '-')}`);
+                            if (grid) {
+                                categoryAssets.forEach(asset => {
+                                    grid.appendChild(createAssetCard(asset));
+                                });
+                            }
+                        }, 0);
+                    }
+                }
+            } else {
+                const categoryAssets = assets[currentCategory].filter(asset => 
+                    asset.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    asset.type.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+
+                if (categoryAssets.length > 0) {
+                    container.innerHTML = '<div class="asset-grid" id="main-grid"></div>';
+                    
+                    setTimeout(() => {
+                        const grid = document.getElementById('main-grid');
+                        if (grid) {
+                            categoryAssets.forEach(asset => {
+                                grid.appendChild(createAssetCard(asset));
+                            });
+                        }
+                    }, 0);
+                } else {
+                    container.innerHTML = '<div class="loading">No assets found matching your search.</div>';
+                }
+            }
+        }
+
+        // Create asset card
+        function createAssetCard(asset) {
+            const card = document.createElement('div');
+            card.className = 'asset-card';
+            
+            let previewContent = '';
+            const fullPath = asset.path;
+
+            if (asset.type === 'PNG' || asset.type === 'JPG') {
+                previewContent = `<img src="${fullPath}" alt="${asset.name}" loading="lazy">`;
+            } else if (asset.type === 'SVG') {
+                previewContent = `<img src="${fullPath}" alt="${asset.name}" loading="lazy">`;
+            } else if (asset.type === 'MP4') {
+                previewContent = `
+                    <video muted>
+                        <source src="${fullPath}" type="video/mp4">
+                    </video>
+                    <div class="play-overlay">▶</div>
+                `;
+            } else if (asset.type === 'ICO') {
+                previewContent = `<img src="${fullPath}" alt="${asset.name}" style="width: 64px; height: 64px;">`;
+            } else {
+                previewContent = `<div style="font-size: 48px;">📄</div>`;
+            }
+
+            card.innerHTML = `
+                <div class="asset-preview" onclick="openLightbox('${fullPath}', '${asset.name}', '${asset.type}')">
+                    ${previewContent}
+                </div>
+                <div class="asset-info">
+                    <div class="asset-name" title="${asset.name}">${asset.name}</div>
+                    <div class="asset-meta">
+                        <span class="asset-type">${asset.type}</span>
+                        <span class="asset-size">${asset.size}</span>
+                    </div>
+                    <div class="asset-actions">
+                        <button class="action-btn" onclick="copyPath('${fullPath}')">Copy Path</button>
+                        <button class="action-btn" onclick="downloadAsset('${fullPath}', '${asset.name}')">Download</button>
+                    </div>
+                </div>
+            `;
+
+            return card;
+        }
+
+        // Open lightbox
+        function openLightbox(path, name, type) {
+            const lightbox = document.getElementById('lightbox');
+            const content = document.getElementById('lightbox-content');
+
+            if (type === 'MP4') {
+                content.innerHTML = `
+                    <video controls autoplay style="max-width: 100%; max-height: 90vh;">
+                        <source src="${path}" type="video/mp4">
+                    </video>
+                    <div class="lightbox-info">${name}</div>
+                `;
+            } else if (type === 'MANIFEST' || type === 'MD') {
+                showToast('Text files cannot be previewed in lightbox');
+                return;
+            } else {
+                content.innerHTML = `
+                    <img src="${path}" alt="${name}">
+                    <div class="lightbox-info">${name}</div>
+                `;
+            }
+
+            lightbox.classList.add('active');
+        }
+
+        // Close lightbox
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            
+            // Stop video if playing
+            const video = lightbox.querySelector('video');
+            if (video) {
+                video.pause();
+            }
+        }
+
+        // Copy path to clipboard
+        function copyPath(path) {
+            event.stopPropagation();
+            const fullPath = path;
+            navigator.clipboard.writeText(fullPath).then(() => {
+                showToast('Path copied to clipboard!');
+            });
+        }
+
+        // Download asset
+        function downloadAsset(path, name) {
+            event.stopPropagation();
+            const link = document.createElement('a');
+            link.href = path;
+            link.download = name;
+            link.click();
+            showToast('Download started!');
+        }
+
+        // Show toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Search functionality
+            document.getElementById('search').addEventListener('input', (e) => {
+                searchTerm = e.target.value;
+                renderAssets();
+            });
+
+            // Lightbox close on background click
+            document.getElementById('lightbox').addEventListener('click', (e) => {
+                if (e.target.id === 'lightbox') {
+                    closeLightbox();
+                }
+            });
+
+            // ESC key to close lightbox
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closeLightbox();
+                }
+            });
+        }
+
+        // Helper function to check if running locally
+        function isLocalFile() {
+            return window.location.protocol === 'file:';
+        }
+
+        // Helper function to load image dimensions
+        function getImageDimensions(url) {
+            return new Promise((resolve) => {
+                const img = new Image();
+                img.onload = () => resolve({ width: img.width, height: img.height });
+                img.onerror = () => resolve({ width: 100, height: 100 }); // Default dimensions
+                img.src = url;
+            });
+        }
+
+        // Helper to convert SVG to data URL (for PDF embedding)
+        async function svgToDataURL(svgUrl) {
+            try {
+                const response = await fetch(svgUrl);
+                const svgText = await response.text();
+                const blob = new Blob([svgText], { type: 'image/svg+xml' });
+                return URL.createObjectURL(blob);
+            } catch (e) {
+                return null;
+            }
+        }
+
+        // Get proper image format for jsPDF
+        function getImageFormat(type) {
+            const upperType = type.toUpperCase();
+            switch(upperType) {
+                case 'PNG': return 'PNG';
+                case 'JPG':
+                case 'JPEG': return 'JPEG';
+                case 'ICO': return null; // ICO not supported
+                case 'SVG': return 'PNG'; // Will try to convert
+                case 'MANIFEST': return null; // Not an image
+                default: return 'PNG';
+            }
+        }
+
+        // Export to PDF function with image rendering
+        async function exportToPDF() {
+            const button = document.getElementById('export-pdf');
+            button.disabled = true;
+            button.innerHTML = '⏳ Generating PDF...';
+            
+            // Show warning if running locally
+            if (isLocalFile()) {
+                const proceed = confirm(
+                    'NOTE: You are viewing this file locally (file:// protocol).\n\n' +
+                    'Images may not appear in the PDF due to browser security restrictions.\n\n' +
+                    'For best results, serve this file via a web server:\n' +
+                    '• Python: python -m http.server 8000\n' +
+                    '• Node.js: npx http-server\n' +
+                    '• VS Code: Use Live Server extension\n\n' +
+                    'Continue anyway?'
+                );
+                if (!proceed) {
+                    button.disabled = false;
+                    button.innerHTML = '📄 Export All to PDF';
+                    return;
+                }
+            }
+            
+            try {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF({
+                    orientation: 'portrait',
+                    unit: 'mm',
+                    format: 'a4'
+                });
+
+                const pageWidth = doc.internal.pageSize.getWidth();
+                const pageHeight = doc.internal.pageSize.getHeight();
+                const margin = 15;
+                const contentWidth = pageWidth - (2 * margin);
+                
+                // Cover Page
+                doc.setFontSize(28);
+                doc.setTextColor(99, 102, 241);
+                doc.text('Customs Edge™', pageWidth / 2, 40, { align: 'center' });
+                
+                doc.setFontSize(20);
+                doc.setTextColor(30, 41, 59);
+                doc.text('Visual Asset Inventory', pageWidth / 2, 55, { align: 'center' });
+                
+                doc.setFontSize(12);
+                doc.setTextColor(107, 114, 128);
+                const date = new Date().toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                });
+                doc.text(`Generated: ${date}`, pageWidth / 2, 70, { align: 'center' });
+                
+                // Summary Statistics
+                let totalAssets = 0;
+                let totalImages = 0;
+                let totalVideos = 0;
+                let totalSVGs = 0;
+                
+                for (const category in assets) {
+                    assets[category].forEach(asset => {
+                        if (asset.type !== 'MD') {
+                            totalAssets++;
+                            if (asset.type === 'PNG' || asset.type === 'JPG' || asset.type === 'ICO') totalImages++;
+                            if (asset.type === 'MP4') totalVideos++;
+                            if (asset.type === 'SVG') totalSVGs++;
+                        }
+                    });
+                }
+                
+                doc.setFontSize(14);
+                doc.setTextColor(30, 41, 59);
+                doc.text('Asset Summary', margin, 100);
+                
+                doc.setFontSize(11);
+                doc.setTextColor(107, 114, 128);
+                doc.text(`Total Assets: ${totalAssets}`, margin + 5, 110);
+                doc.text(`Image Files: ${totalImages}`, margin + 5, 118);
+                doc.text(`SVG Files: ${totalSVGs}`, margin + 5, 126);
+                doc.text(`Video Files: ${totalVideos} (preview frames shown)`, margin + 5, 134);
+                doc.text(`Categories: ${Object.keys(assets).length}`, margin + 5, 142);
+                
+                // Process each category with images
+                button.innerHTML = '⏳ Processing assets...';
+                
+                for (const category in assets) {
+                    const categoryAssets = assets[category].filter(a => a.type !== 'MD');
+                    if (categoryAssets.length === 0) continue;
+                    
+                    doc.addPage();
+                    
+                    // Category Header
+                    doc.setFontSize(18);
+                    doc.setTextColor(99, 102, 241);
+                    doc.text(category, margin, 20);
+                    
+                    doc.setFontSize(10);
+                    doc.setTextColor(107, 114, 128);
+                    doc.text(`${categoryAssets.length} assets`, margin, 27);
+                    
+                    // Image Grid Setup
+                    const cols = 3;
+                    const rows = 4;
+                    const cellWidth = (contentWidth - (cols - 1) * 5) / cols;
+                    const cellHeight = 65;
+                    const imgMaxWidth = cellWidth - 4;
+                    const imgMaxHeight = 45;
+                    let currentCol = 0;
+                    let currentRow = 0;
+                    let startY = 35;
+                    
+                    for (let i = 0; i < categoryAssets.length; i++) {
+                        const asset = categoryAssets[i];
+                        
+                        // Calculate position
+                        const x = margin + (currentCol * (cellWidth + 5));
+                        const y = startY + (currentRow * cellHeight);
+                        
+                        // Check if we need a new page
+                        if (currentRow >= rows) {
+                            doc.addPage();
+                            currentRow = 0;
+                            startY = 20;
+                            const newY = startY + (currentRow * cellHeight);
+                            
+                            // Re-add category header on new page
+                            doc.setFontSize(14);
+                            doc.setTextColor(99, 102, 241);
+                            doc.text(`${category} (continued)`, margin, 15);
+                        }
+                        
+                        // Draw cell border
+                        doc.setDrawColor(229, 231, 235);
+                        doc.rect(x, y, cellWidth, cellHeight - 5);
+                        
+                        // Handle different asset types
+                        if (asset.type === 'MP4') {
+                            // Video placeholder
+                            doc.setFillColor(241, 245, 249);
+                            doc.rect(x + 2, y + 2, imgMaxWidth, imgMaxHeight, 'F');
+                            doc.setFontSize(20);
+                            doc.setTextColor(148, 163, 184);
+                            doc.text('🎬', x + cellWidth/2, y + imgMaxHeight/2, { align: 'center' });
+                            doc.setFontSize(8);
+                            doc.text('VIDEO', x + cellWidth/2, y + imgMaxHeight/2 + 8, { align: 'center' });
+                        } else {
+                            try {
+                                // Try to add image directly using jsPDF's built-in method
+                                // This works better with local files in some cases
+                                const dimensions = await getImageDimensions(asset.path);
+                                
+                                // Calculate image dimensions to fit
+                                let imgWidth = imgMaxWidth;
+                                let imgHeight = imgMaxHeight;
+                                const aspectRatio = dimensions.width / dimensions.height;
+                                
+                                if (aspectRatio > imgMaxWidth / imgMaxHeight) {
+                                    // Image is wider
+                                    imgHeight = imgMaxWidth / aspectRatio;
+                                } else {
+                                    // Image is taller
+                                    imgWidth = imgMaxHeight * aspectRatio;
+                                }
+                                
+                                // Center the image in the cell
+                                const imgX = x + (cellWidth - imgWidth) / 2;
+                                const imgY = y + 2;
+                                
+                                // Handle different file types
+                                const imageFormat = getImageFormat(asset.type);
+                                
+                                if (asset.type === 'ICO') {
+                                    // ICO files - show special favicon placeholder
+                                    doc.setFillColor(255, 245, 230);
+                                    doc.rect(x + 2, y + 2, imgMaxWidth, imgMaxHeight, 'F');
+                                    doc.setFontSize(20);
+                                    doc.text('🔖', x + cellWidth/2, y + imgMaxHeight/2 - 2, { align: 'center' });
+                                    doc.setFontSize(8);
+                                    doc.setTextColor(99, 102, 241);
+                                    doc.text('FAVICON', x + cellWidth/2, y + imgMaxHeight/2 + 8, { align: 'center' });
+                                    
+                                } else if (asset.type === 'MANIFEST') {
+                                    // Manifest files - show JSON icon
+                                    doc.setFillColor(240, 255, 240);
+                                    doc.rect(x + 2, y + 2, imgMaxWidth, imgMaxHeight, 'F');
+                                    doc.setFontSize(20);
+                                    doc.text('📋', x + cellWidth/2, y + imgMaxHeight/2 - 2, { align: 'center' });
+                                    doc.setFontSize(8);
+                                    doc.setTextColor(16, 185, 129);
+                                    doc.text('MANIFEST', x + cellWidth/2, y + imgMaxHeight/2 + 8, { align: 'center' });
+                                    
+                                } else if (asset.type === 'SVG') {
+                                    // SVG files - try to render or show placeholder
+                                    let svgRendered = false;
+                                    
+                                    // Try to load SVG as image
+                                    try {
+                                        const svgImg = new Image();
+                                        await new Promise((resolve, reject) => {
+                                            svgImg.onload = () => {
+                                                try {
+                                                    // Try adding SVG directly
+                                                    doc.addImage(asset.path, 'PNG', imgX, imgY, imgWidth, imgHeight);
+                                                    svgRendered = true;
+                                                } catch (e) {
+                                                    // SVG couldn't be added
+                                                }
+                                                resolve();
+                                            };
+                                            svgImg.onerror = resolve;
+                                            svgImg.src = asset.path;
+                                            setTimeout(resolve, 300);
+                                        });
+                                    } catch (e) {}
+                                    
+                                    if (!svgRendered) {
+                                        // Show SVG placeholder
+                                        doc.setFillColor(230, 240, 255);
+                                        doc.rect(x + 2, y + 2, imgMaxWidth, imgMaxHeight, 'F');
+                                        doc.setFontSize(10);
+                                        doc.setTextColor(99, 102, 241);
+                                        doc.text('</>', x + cellWidth/2, y + imgMaxHeight/2 - 2, { align: 'center' });
+                                        doc.setFontSize(8);
+                                        doc.text('SVG Vector', x + cellWidth/2, y + imgMaxHeight/2 + 6, { align: 'center' });
+                                    }
+                                    
+                                } else if (imageFormat) {
+                                    // PNG/JPG images - try to load and add
+                                    const testImg = new Image();
+                                    await new Promise((resolve) => {
+                                        testImg.onload = () => {
+                                            try {
+                                                // Try to add image to PDF
+                                                doc.addImage(asset.path, imageFormat, imgX, imgY, imgWidth, imgHeight);
+                                            } catch (e) {
+                                                // If fails, try with the image data
+                                                try {
+                                                    // Create canvas to get image data
+                                                    const canvas = document.createElement('canvas');
+                                                    canvas.width = testImg.width;
+                                                    canvas.height = testImg.height;
+                                                    const ctx = canvas.getContext('2d');
+                                                    ctx.drawImage(testImg, 0, 0);
+                                                    const dataURL = canvas.toDataURL(`image/${imageFormat.toLowerCase()}`);
+                                                    doc.addImage(dataURL, imageFormat, imgX, imgY, imgWidth, imgHeight);
+                                                } catch (canvasError) {
+                                                    // Canvas also failed - show placeholder
+                                                    doc.setFillColor(240, 250, 255);
+                                                    doc.rect(x + 2, y + 2, imgMaxWidth, imgMaxHeight, 'F');
+                                                    doc.setFontSize(10);
+                                                    doc.setTextColor(99, 102, 241);
+                                                    doc.text('🖼️', x + cellWidth/2, y + imgMaxHeight/2 - 3, { align: 'center' });
+                                                    doc.setFontSize(7);
+                                                    doc.text('Loading error', x + cellWidth/2, y + imgMaxHeight/2 + 5, { align: 'center' });
+                                                }
+                                            }
+                                            resolve();
+                                        };
+                                        testImg.onerror = () => {
+                                            // Image failed to load
+                                            doc.setFillColor(240, 250, 255);
+                                            doc.rect(x + 2, y + 2, imgMaxWidth, imgMaxHeight, 'F');
+                                            doc.setFontSize(10);
+                                            doc.setTextColor(99, 102, 241);
+                                            doc.text('🖼️', x + cellWidth/2, y + imgMaxHeight/2 - 3, { align: 'center' });
+                                            doc.setFontSize(7);
+                                            doc.text(asset.type, x + cellWidth/2, y + imgMaxHeight/2 + 5, { align: 'center' });
+                                            resolve();
+                                        };
+                                        testImg.crossOrigin = 'anonymous';
+                                        testImg.src = asset.path;
+                                        setTimeout(resolve, 500);
+                                    });
+                                } else {
+                                    // Unknown type - show generic placeholder
+                                    doc.setFillColor(245, 245, 250);
+                                    doc.rect(x + 2, y + 2, imgMaxWidth, imgMaxHeight, 'F');
+                                    doc.setFontSize(8);
+                                    doc.setTextColor(107, 114, 128);
+                                    doc.text(asset.type, x + cellWidth/2, y + imgMaxHeight/2, { align: 'center' });
+                                }
+                            } catch (err) {
+                                // Final fallback - show a nice placeholder
+                                doc.setFillColor(245, 245, 250);
+                                doc.rect(x + 2, y + 2, imgMaxWidth, imgMaxHeight, 'F');
+                                doc.setFontSize(8);
+                                doc.setTextColor(107, 114, 128);
+                                doc.text('Asset preview', x + cellWidth/2, y + imgMaxHeight/2, { align: 'center' });
+                            }
+                        }
+                        
+                        // Add asset info below image
+                        doc.setFontSize(8);
+                        doc.setFont(undefined, 'bold');
+                        doc.setTextColor(30, 41, 59);
+                        
+                        // Truncate filename if too long
+                        const maxNameLength = 20;
+                        const displayName = asset.name.length > maxNameLength ? 
+                            asset.name.substring(0, maxNameLength - 3) + '...' : asset.name;
+                        
+                        doc.text(displayName, x + cellWidth/2, y + imgMaxHeight + 7, { align: 'center' });
+                        
+                        // Add type and size
+                        doc.setFont(undefined, 'normal');
+                        doc.setFontSize(7);
+                        doc.setTextColor(107, 114, 128);
+                        doc.text(`${asset.type} • ${asset.size}`, x + cellWidth/2, y + imgMaxHeight + 12, { align: 'center' });
+                        
+                        // Move to next position
+                        currentCol++;
+                        if (currentCol >= cols) {
+                            currentCol = 0;
+                            currentRow++;
+                        }
+                    }
+                }
+                
+                // Add page numbers
+                const totalPages = doc.internal.getNumberOfPages();
+                for (let i = 1; i <= totalPages; i++) {
+                    doc.setPage(i);
+                    doc.setFontSize(9);
+                    doc.setTextColor(148, 163, 184);
+                    doc.text(
+                        `Page ${i} of ${totalPages}`, 
+                        pageWidth / 2, 
+                        pageHeight - 10, 
+                        { align: 'center' }
+                    );
+                    
+                    // Add footer line
+                    doc.setDrawColor(229, 231, 235);
+                    doc.line(margin, pageHeight - 15, pageWidth - margin, pageHeight - 15);
+                }
+                
+                // Save the PDF
+                const filename = `customs-edge-assets-${new Date().toISOString().split('T')[0]}.pdf`;
+                doc.save(filename);
+                
+                if (isLocalFile()) {
+                    showToast(`PDF exported! Note: Images may not appear when viewing locally. Use a web server for full image support.`);
+                } else {
+                    showToast(`PDF exported successfully as ${filename}`);
+                }
+                
+            } catch (error) {
+                console.error('Error generating PDF:', error);
+                showToast('Error generating PDF. Please try again.');
+            } finally {
+                button.disabled = false;
+                button.innerHTML = '📄 Export All to PDF';
+            }
+        }
+    </script>
+</body>
+</html>

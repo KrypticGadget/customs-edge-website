@@ -1,0 +1,66 @@
+/* Background Image Usage Guide for Customs Edge */
+
+/* Desktop Background (1920x1080 and larger screens) */
+.hero-section {
+  background-image: url('hero-bg-desktop.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Mobile Background (screens smaller than 768px) */
+@media (max-width: 767px) {
+  .hero-section {
+    background-image: url('hero-bg-mobile.png');
+  }
+}
+
+/* Alternative: Using picture element for responsive backgrounds */
+/* HTML:
+<div class="hero-section">
+  <picture class="hero-background">
+    <source media="(max-width: 767px)" srcset="hero-bg-mobile.png">
+    <source media="(min-width: 768px)" srcset="hero-bg-desktop.png">
+    <img src="hero-bg-desktop.png" alt="Background">
+  </picture>
+</div>
+*/
+
+/* With overlay for better text readability */
+.hero-section-with-overlay {
+  position: relative;
+  background-image: url('hero-bg-desktop.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-section-with-overlay::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3); /* 30% black overlay */
+  z-index: 1;
+}
+
+/* Content should have higher z-index */
+.hero-section-with-overlay .content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Parallax effect option */
+.hero-section-parallax {
+  background-image: url('hero-bg-desktop.png');
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Responsive breakpoints */
+/* Mobile: 0-767px - use hero-bg-mobile.png */
+/* Tablet: 768px-1023px - use hero-bg-desktop.png */
+/* Desktop: 1024px+ - use hero-bg-desktop.png */

@@ -1,0 +1,2125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customs Edge™ - Built for Companies Shipping 5-10x Internationally | Entertainment & Live Events</title>
+    <meta name="description" content="The only customs platform built for intermittent international shippers. Perfect for entertainment & live events shipping 5-10 times per year. From 4 hours to 15 minutes per manifest.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon & PWA Support -->
+    <link rel="icon" type="image/x-icon" href="assets/logos/favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/logos/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/logos/favicon/favicon-192x192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/logos/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="assets/logos/favicon/site.webmanifest">
+    <meta name="theme-color" content="#6366f1">
+    
+    <!-- SEO & Social Media Meta Tags -->
+    <meta property="og:title" content="Customs Edge™ - Built for Companies Shipping 5-10x Internationally">
+    <meta property="og:description" content="The only customs platform built for intermittent international shippers. Perfect for entertainment & live events shipping 5-10 times per year. From 4 hours to 15 minutes per manifest.">
+    <meta property="og:image" content="https://customsedge.com/assets/logos/social/og-image.png">
+    <meta property="og:url" content="https://customsedge.com">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Customs Edge">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://customsedge.com/assets/logos/social/og-image.png">
+    <meta name="twitter:title" content="Customs Edge™ - Built for Companies Shipping 5-10x Internationally">
+    <meta name="twitter:description" content="Save $360K annually on customs processing. Perfect for entertainment & live events.">
+    
+    <!-- Preload Critical Assets -->
+    <link rel="preload" href="assets/logos/web/optimized/logo-header.png" as="image">
+    <link rel="preload" href="assets/logos/web/optimized/logo-header-2x.png" as="image">
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Customs Edge",
+      "description": "Customs platform built for companies shipping internationally 5-10 times per year",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "offers": {
+        "@type": "Offer",
+        "price": "Contact for pricing",
+        "priceCurrency": "USD"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "127"
+      }
+    }
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --primary-light: #8b5cf6;
+            --secondary: #0ea5e9;
+            --accent: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --dark: #1f2937;
+            --text-dark: #111827;
+            --text-gray: #6b7280;
+            --light: #ffffff;
+            --light-gray: #f3f4f6;
+            --border: #e5e7eb;
+            --gradient-brand: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            --gradient-blue: linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            background: var(--light);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Splash Screen Styles */
+        .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: #000;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1s ease-out;
+        }
+        
+        .splash-screen.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .splash-screen video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Main Content Hidden Initially */
+        .main-content-hidden {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 1s ease-in;
+        }
+        
+        .main-content-visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Clean Background */
+        .bg-pattern {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            background-color: var(--light);
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.03) 0%, transparent 50%);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 16px 40px;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            height: 40px;
+        }
+        
+        .logo-img {
+            height: 40px;
+            width: auto;
+            display: block;
+            transition: opacity 0.2s ease;
+        }
+        
+        @media (max-width: 640px) {
+            .logo-img {
+                height: 35px;
+                width: 35px;
+            }
+        }
+        
+        /* Initially hide dark logo */
+        .logo .logo-dark {
+            display: none !important;
+        }
+        
+        /* Dark mode support for logo */
+        @media (prefers-color-scheme: dark) {
+            .logo .logo-light {
+                display: none !important;
+            }
+            .logo .logo-dark {
+                display: block !important;
+            }
+        }
+
+        .nav-cta {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .target-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 50px;
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 40px 80px;
+            position: relative;
+            background-image: url('assets/logos/backgrounds/hero-bg-desktop.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                background-image: url('assets/logos/backgrounds/hero-bg-mobile.png');
+                background-attachment: scroll;
+            }
+        }
+        
+        .hero-watermark {
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.08;
+            width: 500px;
+            height: 500px;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .hero-watermark img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        @media (max-width: 1200px) {
+            .hero-watermark {
+                width: 400px;
+                height: 400px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-watermark {
+                width: 300px;
+                height: 300px;
+                right: -50px;
+                opacity: 0.05;
+            }
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .hero-text {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            padding: 8px 16px;
+            border-radius: 50px;
+            color: var(--primary);
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 24px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .badge-icon {
+            color: var(--primary);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        h1 {
+            font-size: clamp(42px, 5.5vw, 68px);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            color: var(--text-dark);
+        }
+
+        .highlight-box {
+            background: rgba(99, 102, 241, 0.05);
+            border-left: 3px solid var(--primary);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        .highlight-text {
+            color: var(--text-dark);
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .highlight-text strong {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .time-comparison {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 24px;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .time-before {
+            color: #ef4444;
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+
+        .time-arrow {
+            color: #10b981;
+        }
+
+        .time-after {
+            color: #10b981;
+            font-size: 32px;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            line-height: 1.6;
+            color: var(--text-gray);
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        .subtitle strong {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        /* Waitlist Form */
+        .waitlist-form {
+            background: var(--light);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 8px;
+            display: flex;
+            gap: 8px;
+            max-width: 500px;
+            box-shadow: var(--shadow-lg);
+        }
+
+
+        .waitlist-form input[type="email"] {
+            flex: 1;
+            padding: 16px 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text-dark);
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .waitlist-form input[type="email"]:focus {
+            border-color: var(--primary);
+        }
+
+        .waitlist-form input[type="email"]::placeholder {
+            color: var(--text-gray);
+        }
+
+        .submit-btn {
+            padding: 16px 32px;
+            background: var(--gradient-brand);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.5s ease;
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Stats */
+        .stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .stat {
+            animation: fadeIn 1s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .stat:nth-child(1) { animation-delay: 0.2s; }
+        .stat:nth-child(2) { animation-delay: 0.4s; }
+        .stat:nth-child(3) { animation-delay: 0.6s; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: 700;
+            background: var(--gradient-brand);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-gray);
+            margin-top: 4px;
+        }
+
+        /* Hero Visual */
+        .hero-visual {
+            position: relative;
+            animation: fadeInRight 1s ease-out;
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .dashboard-preview {
+            background: var(--light);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .dashboard-title {
+            color: var(--text-dark);
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .event-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 20px;
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .annual-overview {
+            background: var(--light-gray);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .overview-title {
+            font-size: 14px;
+            color: var(--text-gray);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .overview-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .overview-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .overview-label {
+            color: var(--text-gray);
+            font-size: 13px;
+        }
+
+        .overview-value {
+            color: var(--text-dark);
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .savings-calculator {
+            background: rgba(99, 102, 241, 0.05);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .calculator-title {
+            color: var(--primary);
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .savings-breakdown {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .savings-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+        }
+
+        .savings-item:last-child {
+            border-bottom: none;
+            padding-top: 8px;
+            border-top: 2px solid rgba(99, 102, 241, 0.3);
+        }
+
+        .savings-label {
+            color: var(--text-gray);
+            font-size: 13px;
+        }
+
+        .savings-value {
+            color: var(--primary);
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .savings-total {
+            font-size: 24px !important;
+            font-weight: 700 !important;
+        }
+
+        /* Target Market Section */
+        .target-section {
+            padding: 120px 40px;
+            position: relative;
+            background: var(--light-gray);
+            background-image: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 40px,
+                    rgba(99, 102, 241, 0.02) 40px,
+                    rgba(99, 102, 241, 0.02) 41px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 40px,
+                    rgba(99, 102, 241, 0.02) 40px,
+                    rgba(99, 102, 241, 0.02) 41px
+                );
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .target-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .target-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .target-title {
+            font-size: clamp(32px, 4vw, 48px);
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: var(--text-dark);
+        }
+
+        .target-subtitle {
+            font-size: 20px;
+            color: var(--text-gray);
+            margin-bottom: 40px;
+        }
+
+        .qualification-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
+        .qualification-card {
+            background: var(--light);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .qualification-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .qualification-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-brand);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .qualification-text {
+            flex: 1;
+        }
+
+        .qualification-number {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .qualification-desc {
+            font-size: 13px;
+            color: var(--text-gray);
+        }
+
+        .industry-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .industry-item {
+            background: var(--light);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .industry-item:hover {
+            background: rgba(99, 102, 241, 0.05);
+            border-color: rgba(99, 102, 241, 0.2);
+            transform: translateX(5px);
+        }
+
+        .industry-icon {
+            width: 24px;
+            height: 24px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .industry-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .industry-name {
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 120px 40px;
+            position: relative;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(99, 102, 241, 0.02) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(139, 92, 246, 0.02) 0%, transparent 50%);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 80px;
+        }
+
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(14, 165, 233, 0.1);
+            border: 1px solid rgba(14, 165, 233, 0.3);
+            padding: 8px 16px;
+            border-radius: 50px;
+            color: #38bdf8;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 24px;
+        }
+
+        h2 {
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            color: var(--text-dark);
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: var(--light);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .feature-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient-brand);
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+        }
+
+        .feature-card:hover::before {
+            transform: translateX(0);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-brand);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 24px;
+        }
+
+        .feature-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+        }
+
+        .feature-description {
+            font-size: 16px;
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        /* Comparison Section */
+        .comparison {
+            padding: 80px 40px;
+            background: var(--light-gray);
+            background-image: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 40px,
+                    rgba(99, 102, 241, 0.01) 40px,
+                    rgba(99, 102, 241, 0.01) 80px
+                );
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .comparison-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .comparison-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            color: var(--text-dark);
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+        }
+
+        .comparison-col {
+            background: var(--light);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+        }
+
+        .comparison-col.highlighted {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.05);
+            transform: scale(1.05);
+            box-shadow: var(--shadow-md);
+        }
+
+        .comparison-header {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+        }
+
+        .comparison-col.highlighted .comparison-header {
+            color: var(--primary);
+        }
+
+        .comparison-item {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-gray);
+            font-size: 14px;
+        }
+
+        .comparison-item:last-child {
+            border-bottom: none;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 120px 40px;
+            position: relative;
+            background-image: 
+                radial-gradient(ellipse at top, rgba(99, 102, 241, 0.03) 0%, transparent 70%),
+                radial-gradient(ellipse at bottom, rgba(139, 92, 246, 0.03) 0%, transparent 70%);
+        }
+
+        .cta-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 30px;
+            padding: 80px 60px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .cta-container::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.05) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .cta-title {
+            font-size: clamp(32px, 4vw, 48px);
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: var(--text-dark);
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-subtitle {
+            font-size: 20px;
+            color: var(--text-gray);
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .roi-highlight {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            padding: 12px 24px;
+            border-radius: 50px;
+            margin-top: 20px;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Section Dividers */
+        .section-divider {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 0;
+            background: transparent;
+            position: relative;
+        }
+        
+        .section-divider img {
+            width: 60px;
+            height: 60px;
+            opacity: 0.05;
+            transition: opacity 0.3s ease;
+        }
+        
+        .section-divider:hover img {
+            opacity: 0.1;
+        }
+        
+        @media (max-width: 640px) {
+            .section-divider {
+                padding: 30px 0;
+            }
+            
+            .section-divider img {
+                width: 40px;
+                height: 40px;
+            }
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--light-gray);
+            border-top: 1px solid var(--border);
+            padding: 60px 40px 20px;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 60px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .footer-logo {
+            width: 48px;
+            height: 48px;
+        }
+
+        .footer-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .footer-tagline {
+            font-size: 13px;
+            color: var(--text-gray);
+            line-height: 1.4;
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .footer-section h5 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-section a {
+            display: block;
+            color: var(--text-gray);
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 12px;
+            transition: color 0.2s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 16px;
+            justify-content: flex-end;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-gray);
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: var(--text-gray);
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .footer-legal a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-legal a:hover {
+            color: var(--primary);
+        }
+
+        @media (max-width: 968px) {
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .footer-social {
+                justify-content: flex-start;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 16px;
+            }
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            padding: 16px 24px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 12px;
+            color: #10b981;
+            font-weight: 500;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        /* Loading animation */
+        .loader {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .submit-btn.loading .btn-text {
+            display: none;
+        }
+
+        .submit-btn.loading .loader {
+            display: inline-block;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+
+            .hero-visual {
+                order: -1;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                justify-content: space-between;
+                width: 100%;
+            }
+
+            h1 {
+                font-size: clamp(32px, 7vw, 48px);
+            }
+
+            .cta-container {
+                padding: 60px 40px;
+            }
+
+            .qualification-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .comparison-col.highlighted {
+                transform: scale(1);
+            }
+
+            .nav-cta {
+                display: none;
+            }
+        }
+
+        @media (max-width: 640px) {
+            nav {
+                padding: 16px 20px;
+            }
+
+            .hero {
+                padding: 100px 20px 60px;
+            }
+
+            .features {
+                padding: 80px 20px;
+            }
+
+            .target-section {
+                padding: 80px 20px;
+            }
+
+            .cta-section {
+                padding: 80px 20px;
+            }
+
+            .waitlist-form {
+                flex-direction: column;
+            }
+
+            .submit-btn {
+                width: 100%;
+            }
+
+            .overview-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .stat {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .industry-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Splash Screen Video -->
+    <div id="splash-screen" class="splash-screen">
+        <video id="splash-video" muted autoplay playsinline>
+            <source src="" type="video/mp4">
+        </video>
+    </div>
+    
+    <!-- Main Website Content -->
+    <div id="main-content" class="main-content-hidden">
+        <!-- Clean Background Pattern -->
+        <div class="bg-pattern"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <picture>
+                    <source media="(max-width: 640px)" srcset="assets/logos/svg/monogram-simple.svg">
+                    <img src="assets/logos/svg/logo-horizontal-simple.svg"
+                         alt="Customs Edge - Customs platform for intermittent international shippers" 
+                         class="logo-img"
+                         width="180"
+                         height="40">
+                </picture>
+            </div>
+            <div class="nav-cta">
+                <div class="target-badge">
+                    <span>For 5-10x/Year Shippers</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <!-- Brand Watermark -->
+        <div class="hero-watermark">
+            <img src="assets/logos/svg/monogram-simple.svg" alt="" aria-hidden="true">
+        </div>
+        
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="badge">
+                    <svg class="badge-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <circle cx="8" cy="8" r="3" opacity="0.8"/>
+                        <circle cx="8" cy="8" r="5" fill="none" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+                        <circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.2"/>
+                    </svg>
+                    <span>Built for Intermittent International Shippers</span>
+                </div>
+                
+                <h1>Ship 5-10 Times Per Year?<br>You're Our Sweet Spot.</h1>
+                
+                <div class="highlight-box">
+                    <p class="highlight-text">
+                        You ship <strong>too often</strong> to ignore efficiency (250-3,000 manifests/year)<br>
+                        But <strong>not often enough</strong> to justify a $150K+ customs expert
+                    </p>
+                </div>
+                
+                <p class="subtitle">
+                    <strong>Entertainment companies, concert tours, sports leagues, conferences</strong> - 
+                    if you ship internationally 5-10 times per year, you're losing $360,000 annually 
+                    on inefficient customs processing. We fix that in 2 weeks.
+                </p>
+
+                <!-- Netlify Form with data-netlify attribute -->
+                <form class="waitlist-form" name="waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                    <input type="hidden" name="form-name" value="waitlist">
+                    <p style="display:none;">
+                        <label>Don't fill this out: <input name="bot-field"></label>
+                    </p>
+                    <input type="email" name="email" placeholder="Enter your work email" required>
+                    <button type="submit" class="submit-btn">
+                        <span class="btn-text">Join the Waitlist</span>
+                        <span class="loader"></span>
+                    </button>
+                </form>
+                
+                <div id="success-message" class="success-message">
+                    🎉 Welcome! We'll contact you soon about early access for intermittent shippers.
+                </div>
+
+                <div class="stats">
+                    <div class="stat">
+                        <div class="stat-number">1,280</div>
+                        <div class="stat-label">Avg Manifests/Year</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">4,800</div>
+                        <div class="stat-label">Hours Saved/Year</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">$360K</div>
+                        <div class="stat-label">Annual Savings</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="dashboard-preview">
+                    <div class="dashboard-header">
+                        <div class="dashboard-brand">
+                            <img src="assets/logos/svg/monogram-simple.svg" alt="CE" style="width: 24px; height: 24px; opacity: 0.7;">
+                            <div class="dashboard-title">Your Annual Impact</div>
+                        </div>
+                        <div class="event-indicator">
+                            <span class="dot"></span>
+                            <span>Live Events</span>
+                        </div>
+                    </div>
+                    
+                    <div class="annual-overview">
+                        <div class="overview-title">Typical Client Profile</div>
+                        <div class="overview-stats">
+                            <div class="overview-item">
+                                <span class="overview-label">International Events</span>
+                                <span class="overview-value">8/year</span>
+                            </div>
+                            <div class="overview-item">
+                                <span class="overview-label">Countries</span>
+                                <span class="overview-value">8</span>
+                            </div>
+                            <div class="overview-item">
+                                <span class="overview-label">Manifests/Event</span>
+                                <span class="overview-value">20</span>
+                            </div>
+                            <div class="overview-item">
+                                <span class="overview-label">Total Manifests</span>
+                                <span class="overview-value">1,280</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="savings-calculator">
+                        <div class="powered-badge">
+                            <span style="font-size: 10px; color: #6b7280; opacity: 0.7;">Powered by</span>
+                            <img src="assets/logos/svg/monogram-simple.svg" alt="CE" style="width: 16px; height: 16px; opacity: 0.5; margin-left: 4px;">
+                        </div>
+                        <div class="calculator-title">Your ROI Calculator</div>
+                        <div class="savings-breakdown">
+                            <div class="savings-item">
+                                <span class="savings-label">Current Time: 4hr × 1,280</span>
+                                <span class="savings-value">5,120 hrs</span>
+                            </div>
+                            <div class="savings-item">
+                                <span class="savings-label">With Customs Edge: 15min × 1,280</span>
+                                <span class="savings-value">320 hrs</span>
+                            </div>
+                            <div class="savings-item">
+                                <span class="savings-label">Platform Cost</span>
+                                <span class="savings-value">-$100K</span>
+                            </div>
+                            <div class="savings-item">
+                                <span class="savings-label savings-total">Net Annual Savings</span>
+                                <span class="savings-value savings-total">$260K</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Target Market Section -->
+    <section class="target-section">
+        <div class="target-container">
+            <div class="target-header">
+                <h2 class="target-title">You Need Customs Edge If...</h2>
+                <p class="target-subtitle">We're purpose-built for companies in your exact situation</p>
+            </div>
+
+            <div class="qualification-grid">
+                <div class="qualification-card">
+                    <div class="qualification-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                        </svg>
+                    </div>
+                    <div class="qualification-text">
+                        <div class="qualification-number">5-10x</div>
+                        <div class="qualification-desc">International shipments per year</div>
+                    </div>
+                </div>
+                <div class="qualification-card">
+                    <div class="qualification-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/>
+                            <line x1="8" y1="2" x2="8" y2="18"/>
+                            <line x1="16" y1="6" x2="16" y2="22"/>
+                        </svg>
+                    </div>
+                    <div class="qualification-text">
+                        <div class="qualification-number">5-10</div>
+                        <div class="qualification-desc">Different countries annually</div>
+                    </div>
+                </div>
+                <div class="qualification-card">
+                    <div class="qualification-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10 9 9 9 8 9"/>
+                        </svg>
+                    </div>
+                    <div class="qualification-text">
+                        <div class="qualification-number">250-3K</div>
+                        <div class="qualification-desc">Customs manifests per year</div>
+                    </div>
+                </div>
+                <div class="qualification-card">
+                    <div class="qualification-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                    </div>
+                    <div class="qualification-text">
+                        <div class="qualification-number">4+ hrs</div>
+                        <div class="qualification-desc">Per manifest currently</div>
+                    </div>
+                </div>
+                <div class="qualification-card">
+                    <div class="qualification-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <line x1="12" y1="1" x2="12" y2="23"/>
+                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                        </svg>
+                    </div>
+                    <div class="qualification-text">
+                        <div class="qualification-number">$0</div>
+                        <div class="qualification-desc">Full-time customs staff</div>
+                    </div>
+                </div>
+                <div class="qualification-card">
+                    <div class="qualification-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/>
+                        </svg>
+                    </div>
+                    <div class="qualification-text">
+                        <div class="qualification-number">Zero</div>
+                        <div class="qualification-desc">Tolerance for delays</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="target-header" style="margin-top: 60px;">
+                <h3 style="font-size: 28px; color: #f1f5f9; margin-bottom: 30px;">Perfect Fit Industries</h3>
+            </div>
+
+            <div class="industry-list">
+                <div class="industry-item">
+                    <span class="industry-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                    </span>
+                    <span class="industry-name">Live Entertainment & Tours</span>
+                </div>
+                <div class="industry-item">
+                    <span class="industry-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
+                        </svg>
+                    </span>
+                    <span class="industry-name">Sports Organizations & Leagues</span>
+                </div>
+                <div class="industry-item">
+                    <span class="industry-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z"/>
+                        </svg>
+                    </span>
+                    <span class="industry-name">Film & Broadcast Production</span>
+                </div>
+                <div class="industry-item">
+                    <span class="industry-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                        </svg>
+                    </span>
+                    <span class="industry-name">Music Festivals & Events</span>
+                </div>
+                <div class="industry-item">
+                    <span class="industry-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14zM9 8l7 4-7 4z"/>
+                        </svg>
+                    </span>
+                    <span class="industry-name">Broadcast Networks</span>
+                </div>
+                <div class="industry-item">
+                    <span class="industry-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M15 7.5V2H9v5.5l3 3 3-3zM7.5 9H2v6h5.5l3-3-3-3zM9 16.5V22h6v-5.5l-3-3-3 3zM16.5 9l-3 3 3 3H22V9h-5.5z"/>
+                        </svg>
+                    </span>
+                    <span class="industry-name">Esports Tournaments</span>
+                </div>
+                <div class="industry-item">
+                    <span class="industry-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                        </svg>
+                    </span>
+                    <span class="industry-name">Global Conferences</span>
+                </div>
+                <div class="industry-item">
+                    <span class="industry-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2l-5.5 9h11z M12 22l5.5-9h-11z M3.5 9L12 11.5 8.5 20z M20.5 9L12 11.5l3.5 8.5z"/>
+                        </svg>
+                    </span>
+                    <span class="industry-name">Fashion Shows</span>
+                </div>
+                <div class="industry-item">
+                    <span class="industry-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c1.19 0 2.34-.21 3.41-.6.3-.11.49-.4.49-.72 0-.43-.35-.78-.78-.78-.17 0-.33.06-.46.11-.91.31-1.87.49-2.66.49-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7c0 .79-.16 1.75-.49 2.66-.05.13-.11.29-.11.46 0 .43.35.78.78.78.32 0 .61-.2.72-.49.39-1.07.6-2.22.6-3.41 0-5.52-4.48-10-10-10z"/>
+                        </svg>
+                    </span>
+                    <span class="industry-name">Art Exhibitions</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="section-header">
+            <div class="section-badge">Purpose-Built Features</div>
+            <h2>Designed for Irregular but Critical Shipments</h2>
+            <p class="section-subtitle">
+                Unlike KlearNow (built for daily freight forwarders), we're optimized for your 
+                5-10 annual international events where every manifest matters.
+            </p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <circle cx="12" cy="12" r="6"/>
+                        <circle cx="12" cy="12" r="2"/>
+                    </svg>
+                </div>
+                <h3 class="feature-title">Entertainment-Specialized AI</h3>
+                <p class="feature-description">
+                    Pre-trained on broadcast, production, medical, and touring equipment. 
+                    We know a "camera kit" includes 47 components with different classifications.
+                </p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                    </svg>
+                </div>
+                <h3 class="feature-title">Zero Learning Curve</h3>
+                <p class="feature-description">
+                    Built for teams who ship 5-10x per year. No training needed. 
+                    Template library from previous events. Works instantly.
+                </p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <path d="M9 11H3v2h6v-2zm0-4H3v2h6V7zm0 8H3v2h6v-2zm12-4h-6v2h6v-2zm0-4h-6v2h6V7zm0 8h-6v2h6v-2z"/>
+                    </svg>
+                </div>
+                <h3 class="feature-title">Event-Aware Compliance</h3>
+                <p class="feature-description">
+                    Pyrotechnics permits, broadcast frequencies, venue restrictions. 
+                    We understand live events, not just shipping.
+                </p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <line x1="12" y1="1" x2="12" y2="23"/>
+                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                    </svg>
+                </div>
+                <h3 class="feature-title">Replace $150K Staff</h3>
+                <p class="feature-description">
+                    Get Fortune 500 customs capabilities for $10K/month. 
+                    3.6x ROI in Year 1, 5x+ ongoing.
+                </p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <line x1="18" y1="20" x2="18" y2="10"/>
+                        <line x1="12" y1="20" x2="12" y2="4"/>
+                        <line x1="6" y1="20" x2="6" y2="14"/>
+                    </svg>
+                </div>
+                <h3 class="feature-title">Seasonal Intelligence</h3>
+                <p class="feature-description">
+                    Pattern recognition for touring seasons, festival circuits, conference schedules. 
+                    Predictive planning before events are booked.
+                </p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                    </svg>
+                </div>
+                <h3 class="feature-title">2-Week Integration</h3>
+                <p class="feature-description">
+                    Native connectors for SAP, Oracle, NetSuite. No disruption to your workflow. 
+                    Start saving immediately.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section class="comparison">
+        <div class="comparison-container">
+            <h2 class="comparison-title">Why We Win for Intermittent Shippers</h2>
+            
+            <div class="comparison-grid">
+                <div class="comparison-col">
+                    <div class="comparison-header">KlearNow & Others</div>
+                    <div class="comparison-item">Built for daily shippers</div>
+                    <div class="comparison-item">Freight forwarder focus</div>
+                    <div class="comparison-item">High volume required</div>
+                    <div class="comparison-item">Generic classifications</div>
+                    <div class="comparison-item">6-month implementation</div>
+                </div>
+                
+                <div class="comparison-col highlighted">
+                    <div class="comparison-header">Customs Edge™</div>
+                    <div class="comparison-item">Built for 5-10x/year</div>
+                    <div class="comparison-item">Direct enterprise focus</div>
+                    <div class="comparison-item">Perfect for 250-3K manifests</div>
+                    <div class="comparison-item">Entertainment-specialized</div>
+                    <div class="comparison-item">2-week deployment</div>
+                </div>
+                
+                <div class="comparison-col">
+                    <div class="comparison-header">In-House Team</div>
+                    <div class="comparison-item">$150K+ annual cost</div>
+                    <div class="comparison-item">Single person dependency</div>
+                    <div class="comparison-item">No scalability</div>
+                    <div class="comparison-item">Manual processes</div>
+                    <div class="comparison-item">15% error rate</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-container">
+            <h2 class="cta-title">Stop Losing $360K/Year on Manual Customs</h2>
+            <p class="cta-subtitle">
+                Join entertainment companies saving 4,800 hours annually.<br>
+                Perfect for companies shipping internationally 5-10 times per year.
+            </p>
+            
+            <form class="waitlist-form" name="waitlist-cta" method="POST" data-netlify="true" netlify-honeypot="bot-field-cta" style="max-width: 500px; margin: 0 auto;">
+                <input type="hidden" name="form-name" value="waitlist-cta">
+                <p style="display:none;">
+                    <label>Don't fill this out: <input name="bot-field-cta"></label>
+                </p>
+                <input type="email" name="email" placeholder="Enter your work email" required>
+                <button type="submit" class="submit-btn">
+                    <span class="btn-text">Get Early Access</span>
+                    <span class="loader"></span>
+                </button>
+            </form>
+            
+            <div class="roi-highlight">
+                <span>💰</span>
+                <span>3.6x ROI Year 1 • 5x+ Ongoing • 2-Week Implementation</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-brand">
+                <img src="assets/logos/svg/monogram-simple.svg" alt="Customs Edge" class="footer-logo">
+                <div class="footer-info">
+                    <h4 class="footer-title">Customs Edge™</h4>
+                    <p class="footer-tagline">Purpose-Built for Companies Shipping 5-10x Internationally</p>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <div class="footer-section">
+                    <h5>Product</h5>
+                    <a href="#features">Features</a>
+                    <a href="#pricing">Pricing</a>
+                    <a href="#demo">Demo</a>
+                </div>
+                <div class="footer-section">
+                    <h5>Company</h5>
+                    <a href="#about">About</a>
+                    <a href="#contact">Contact</a>
+                    <a href="#careers">Careers</a>
+                </div>
+                <div class="footer-section">
+                    <h5>Resources</h5>
+                    <a href="#docs">Documentation</a>
+                    <a href="#support">Support</a>
+                    <a href="#blog">Blog</a>
+                </div>
+            </div>
+            
+            <div class="footer-social">
+                <a href="#" class="social-link" aria-label="LinkedIn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                </a>
+                <a href="#" class="social-link" aria-label="Twitter">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>
+                    </svg>
+                </a>
+                <a href="#" class="social-link" aria-label="GitHub">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2025 Customs Edge™. All rights reserved.</p>
+            <div class="footer-legal">
+                <a href="#privacy">Privacy Policy</a>
+                <span>•</span>
+                <a href="#terms">Terms of Service</a>
+                <span>•</span>
+                <a href="#cookies">Cookie Policy</a>
+            </div>
+        </div>
+    </footer>
+    </div> <!-- End main-content -->
+
+    <script>
+        // Handle form submissions with better UX
+        document.addEventListener('DOMContentLoaded', function() {
+            const forms = document.querySelectorAll('form[data-netlify="true"]');
+            
+            forms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    const btn = form.querySelector('.submit-btn');
+                    const successMsg = document.getElementById('success-message');
+                    
+                    // Add loading state
+                    btn.classList.add('loading');
+                    
+                    // Show success message after form processes (Netlify handles the actual submission)
+                    setTimeout(() => {
+                        btn.classList.remove('loading');
+                        if (successMsg && form.name === 'waitlist') {
+                            successMsg.classList.add('show');
+                            form.reset();
+                            
+                            // Hide success message after 5 seconds
+                            setTimeout(() => {
+                                successMsg.classList.remove('show');
+                            }, 5000);
+                        }
+                    }, 1500);
+                });
+            });
+
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+
+            // Add parallax effect to orbs
+            window.addEventListener('mousemove', (e) => {
+                const orbs = document.querySelectorAll('.gradient-orb');
+                const x = e.clientX / window.innerWidth;
+                const y = e.clientY / window.innerHeight;
+                
+                orbs.forEach((orb, index) => {
+                    const speed = (index + 1) * 10;
+                    orb.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
+                });
+            });
+
+            // Intersection Observer for animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe feature cards and qualification cards
+            document.querySelectorAll('.feature-card, .qualification-card, .industry-item').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'all 0.6s ease-out';
+                observer.observe(card);
+            });
+
+            // Splash Screen Video Implementation
+            function initSplashVideo() {
+                const splashScreen = document.getElementById('splash-screen');
+                const splashVideo = document.getElementById('splash-video');
+                const mainContent = document.getElementById('main-content');
+                
+                if (!splashScreen || !splashVideo || !mainContent) return;
+                
+                // Determine which video to load based on device
+                let videoSrc = 'assets/video/splash-entry.mp4'; // Default desktop
+                
+                const width = window.innerWidth;
+                const height = window.innerHeight;
+                const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+                
+                if (isMobile || width <= 768) {
+                    // Mobile device detected
+                    if (height > width) {
+                        // Portrait orientation
+                        videoSrc = 'assets/video/splash-entry-mobile-portrait.mp4';
+                    } else if (width / height > 1.5) {
+                        // Landscape orientation
+                        videoSrc = 'assets/video/splash-entry-mobile-landscape.mp4';
+                    } else {
+                        // Square-ish or tablet
+                        videoSrc = 'assets/video/splash-entry-mobile-square.mp4';
+                    }
+                }
+                
+                // Function to hide splash and show main content
+                function showMainContent() {
+                    splashScreen.classList.add('fade-out');
+                    mainContent.classList.remove('main-content-hidden');
+                    mainContent.classList.add('main-content-visible');
+                    
+                    // Remove splash screen from DOM after fade
+                    setTimeout(() => {
+                        splashScreen.style.display = 'none';
+                    }, 1000);
+                }
+                
+                // Set video source
+                splashVideo.src = videoSrc;
+                
+                // Video ended event
+                splashVideo.addEventListener('ended', showMainContent);
+                
+                
+                // Fallback: If video fails to load or play
+                splashVideo.addEventListener('error', () => {
+                    console.log('Video failed to load, showing content');
+                    showMainContent();
+                });
+                
+                // Try to play the video
+                const playPromise = splashVideo.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.log('Autoplay failed:', error);
+                        // If autoplay fails, show content immediately
+                        showMainContent();
+                    });
+                }
+                
+                // Maximum splash duration (fallback)
+                setTimeout(() => {
+                    if (!mainContent.classList.contains('main-content-visible')) {
+                        showMainContent();
+                    }
+                }, 10000); // 10 seconds max
+            }
+            
+            // Initialize splash video when DOM is ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initSplashVideo);
+            } else {
+                initSplashVideo();
+            }
+            
+            // Animated counter for stats
+            function animateValue(element, start, end, duration, suffix = '') {
+                let startTimestamp = null;
+                const isDecimal = !Number.isInteger(end);
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    const value = progress * (end - start) + start;
+                    if (isDecimal) {
+                        element.textContent = value.toFixed(1) + suffix;
+                    } else {
+                        element.textContent = Math.floor(value).toLocaleString() + suffix;
+                    }
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    }
+                };
+                window.requestAnimationFrame(step);
+            }
+
+            // Trigger counter animation when in view
+            const statObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !entry.target.animated) {
+                        entry.target.animated = true;
+                        const text = entry.target.textContent;
+                        
+                        if (text.includes('K')) {
+                            const value = parseFloat(text.replace('K', '').replace('$', ''));
+                            animateValue(entry.target, 0, value, 2000, 'K');
+                        } else if (text.includes(',')) {
+                            const value = parseInt(text.replace(/,/g, ''));
+                            animateValue(entry.target, 0, value, 2000);
+                        } else {
+                            const value = parseInt(text);
+                            if (!isNaN(value)) {
+                                animateValue(entry.target, 0, value, 2000);
+                            }
+                        }
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            document.querySelectorAll('.stat-number, .overview-value, .qualification-number').forEach(stat => {
+                const text = stat.textContent;
+                if (text.match(/[\d,K$]/)) {
+                    statObserver.observe(stat);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
