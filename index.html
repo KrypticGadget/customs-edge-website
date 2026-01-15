@@ -27,7 +27,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://customsedge.com/assets/logos/social/og-image.png">
     <meta name="twitter:title" content="Customs Edge™ - Built for Companies Shipping 5-10x Internationally">
-    <meta name="twitter:description" content="Save $360K annually on customs processing. Perfect for entertainment & live events.">
+    <meta name="twitter:description" content="Save 600+ hours annually on customs processing. 93% time reduction. Perfect for entertainment & live events.">
     
     <!-- Preload Critical Assets -->
     <link rel="preload" href="assets/logos/web/optimized/logo-header.png" as="image">
@@ -83,10 +83,14 @@
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
 
+        html, body {
+            overflow-x: hidden;
+            max-width: 100vw;
+        }
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             color: var(--text-dark);
-            overflow-x: hidden;
             background: var(--light);
             margin: 0;
             padding: 0;
@@ -116,6 +120,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: center center;
         }
         
         /* Main Content Hidden Initially */
@@ -192,8 +197,12 @@
         
         @media (max-width: 640px) {
             .logo-img {
-                height: 35px;
-                width: 35px;
+                height: 38px;
+                width: auto;
+            }
+
+            .nav-container {
+                justify-content: center;
             }
         }
         
@@ -585,131 +594,37 @@
             }
         }
 
-        .dashboard-preview {
+        /* Demo Video Container */
+        .demo-video-container {
             background: var(--light);
             border: 1px solid var(--border);
             border-radius: 20px;
-            padding: 30px;
+            padding: 12px;
             box-shadow: var(--shadow-lg);
             position: relative;
             overflow: hidden;
         }
 
-        .dashboard-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
+        .demo-video {
+            width: 100%;
+            border-radius: 12px;
+            display: block;
+            background: #000;
         }
 
-        .dashboard-title {
-            color: var(--text-dark);
-            font-size: 18px;
-            font-weight: 600;
-        }
-
-        .event-indicator {
+        .demo-video-label {
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
-            padding: 6px 12px;
-            background: rgba(99, 102, 241, 0.1);
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            border-radius: 20px;
-            color: var(--primary);
-            font-size: 12px;
-            font-weight: 500;
-        }
-
-        .annual-overview {
-            background: var(--light-gray);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .overview-title {
-            font-size: 14px;
-            color: var(--text-gray);
-            margin-bottom: 16px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .overview-stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-
-        .overview-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .overview-label {
-            color: var(--text-gray);
-            font-size: 13px;
-        }
-
-        .overview-value {
-            color: var(--text-dark);
-            font-size: 18px;
-            font-weight: 600;
-        }
-
-        .savings-calculator {
-            background: rgba(99, 102, 241, 0.05);
-            border: 1px solid rgba(99, 102, 241, 0.2);
-            border-radius: 12px;
-            padding: 20px;
-        }
-
-        .calculator-title {
+            padding: 12px 0 4px;
             color: var(--primary);
             font-size: 14px;
             font-weight: 600;
-            margin-bottom: 16px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
-        .savings-breakdown {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .savings-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-bottom: 12px;
-            border-bottom: 1px solid rgba(16, 185, 129, 0.1);
-        }
-
-        .savings-item:last-child {
-            border-bottom: none;
-            padding-top: 8px;
-            border-top: 2px solid rgba(99, 102, 241, 0.3);
-        }
-
-        .savings-label {
-            color: var(--text-gray);
-            font-size: 13px;
-        }
-
-        .savings-value {
+        .demo-video-label svg {
             color: var(--primary);
-            font-size: 16px;
-            font-weight: 600;
-        }
-
-        .savings-total {
-            font-size: 24px !important;
-            font-weight: 700 !important;
         }
 
         /* Target Market Section */
@@ -1452,14 +1367,11 @@
     <nav>
         <div class="nav-container">
             <div class="logo">
-                <picture>
-                    <source media="(max-width: 640px)" srcset="assets/logos/svg/monogram-simple.svg">
-                    <img src="assets/logos/svg/logo-horizontal-simple.svg"
-                         alt="Customs Edge - Customs platform for intermittent international shippers" 
-                         class="logo-img"
-                         width="180"
-                         height="40">
-                </picture>
+                <img src="assets/logos/svg/logo-horizontal-simple.svg"
+                     alt="Customs Edge - Customs platform for intermittent international shippers"
+                     class="logo-img"
+                     width="180"
+                     height="40">
             </div>
             <div class="nav-cta">
                 <div class="target-badge">
@@ -1491,15 +1403,13 @@
                 
                 <div class="highlight-box">
                     <p class="highlight-text">
-                        You ship <strong>too often</strong> to ignore efficiency (250-3,000 manifests/year)<br>
+                        You ship <strong>too often</strong> to ignore efficiency (100-300 manifests/year)<br>
                         But <strong>not often enough</strong> to justify a $150K+ customs expert
                     </p>
                 </div>
-                
+
                 <p class="subtitle">
-                    <strong>Entertainment companies, concert tours, sports leagues, conferences</strong> - 
-                    if you ship internationally 5-10 times per year, you're losing $360,000 annually 
-                    on inefficient customs processing. We fix that in 2 weeks.
+                    <strong>Entertainment companies, concert tours, sports leagues, conferences</strong>—if you ship internationally 5-10 times per year, you're losing thousands of hours on inefficient customs processing. We fix that in 2 weeks.
                 </p>
 
                 <!-- Netlify Form with data-netlify attribute -->
@@ -1521,79 +1431,31 @@
 
                 <div class="stats">
                     <div class="stat">
-                        <div class="stat-number">1,280</div>
-                        <div class="stat-label">Avg Manifests/Year</div>
+                        <div class="stat-number">160</div>
+                        <div class="stat-label">Avg Manifests/Client</div>
                     </div>
                     <div class="stat">
-                        <div class="stat-number">4,800</div>
+                        <div class="stat-number">600</div>
                         <div class="stat-label">Hours Saved/Year</div>
                     </div>
                     <div class="stat">
-                        <div class="stat-number">$360K</div>
-                        <div class="stat-label">Annual Savings</div>
+                        <div class="stat-number">93%</div>
+                        <div class="stat-label">Time Reduction</div>
                     </div>
                 </div>
             </div>
 
             <div class="hero-visual">
-                <div class="dashboard-preview">
-                    <div class="dashboard-header">
-                        <div class="dashboard-brand">
-                            <img src="assets/logos/svg/monogram-simple.svg" alt="CE" style="width: 24px; height: 24px; opacity: 0.7;">
-                            <div class="dashboard-title">Your Annual Impact</div>
-                        </div>
-                        <div class="event-indicator">
-                            <span class="dot"></span>
-                            <span>Live Events</span>
-                        </div>
-                    </div>
-                    
-                    <div class="annual-overview">
-                        <div class="overview-title">Typical Client Profile</div>
-                        <div class="overview-stats">
-                            <div class="overview-item">
-                                <span class="overview-label">International Events</span>
-                                <span class="overview-value">8/year</span>
-                            </div>
-                            <div class="overview-item">
-                                <span class="overview-label">Countries</span>
-                                <span class="overview-value">8</span>
-                            </div>
-                            <div class="overview-item">
-                                <span class="overview-label">Manifests/Event</span>
-                                <span class="overview-value">20</span>
-                            </div>
-                            <div class="overview-item">
-                                <span class="overview-label">Total Manifests</span>
-                                <span class="overview-value">1,280</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="savings-calculator">
-                        <div class="powered-badge">
-                            <span style="font-size: 10px; color: #6b7280; opacity: 0.7;">Powered by</span>
-                            <img src="assets/logos/svg/monogram-simple.svg" alt="CE" style="width: 16px; height: 16px; opacity: 0.5; margin-left: 4px;">
-                        </div>
-                        <div class="calculator-title">Your ROI Calculator</div>
-                        <div class="savings-breakdown">
-                            <div class="savings-item">
-                                <span class="savings-label">Current Time: 4hr × 1,280</span>
-                                <span class="savings-value">5,120 hrs</span>
-                            </div>
-                            <div class="savings-item">
-                                <span class="savings-label">With Customs Edge: 15min × 1,280</span>
-                                <span class="savings-value">320 hrs</span>
-                            </div>
-                            <div class="savings-item">
-                                <span class="savings-label">Platform Cost</span>
-                                <span class="savings-value">-$100K</span>
-                            </div>
-                            <div class="savings-item">
-                                <span class="savings-label savings-total">Net Annual Savings</span>
-                                <span class="savings-value savings-total">$260K</span>
-                            </div>
-                        </div>
+                <div class="demo-video-container">
+                    <video id="demo-video" class="demo-video" controls poster="assets/logos/social/og-image.png">
+                        <source src="Customs_Edge_Simple_Demo_Final_Cut.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="demo-video-label">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                        </svg>
+                        <span>Watch Demo</span>
                     </div>
                 </div>
             </div>
@@ -1645,7 +1507,7 @@
                         </svg>
                     </div>
                     <div class="qualification-text">
-                        <div class="qualification-number">250-3K</div>
+                        <div class="qualification-number">100-300</div>
                         <div class="qualification-desc">Customs manifests per year</div>
                     </div>
                 </div>
@@ -1657,7 +1519,7 @@
                         </svg>
                     </div>
                     <div class="qualification-text">
-                        <div class="qualification-number">4+ hrs</div>
+                        <div class="qualification-number">4+ Hours</div>
                         <div class="qualification-desc">Per manifest currently</div>
                     </div>
                 </div>
@@ -1774,7 +1636,7 @@
             <div class="section-badge">Purpose-Built Features</div>
             <h2>Designed for Irregular but Critical Shipments</h2>
             <p class="section-subtitle">
-                Unlike KlearNow (built for daily freight forwarders), we're optimized for your 
+                Unlike freight forwarder tools built for daily shippers, we're optimized for your
                 5-10 annual international events where every manifest matters.
             </p>
         </div>
@@ -1816,7 +1678,7 @@
                 </div>
                 <h3 class="feature-title">Event-Aware Compliance</h3>
                 <p class="feature-description">
-                    Pyrotechnics permits, broadcast frequencies, venue restrictions. 
+                    Country-specific regulations, equipment classifications, temporary import rules.
                     We understand live events, not just shipping.
                 </p>
             </div>
@@ -1828,10 +1690,10 @@
                         <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
                     </svg>
                 </div>
-                <h3 class="feature-title">Replace $150K Staff</h3>
+                <h3 class="feature-title">No Customs Staff Required</h3>
                 <p class="feature-description">
-                    Get Fortune 500 customs capabilities for $10K/month. 
-                    3.6x ROI in Year 1, 5x+ ongoing.
+                    Get Fortune 500 customs capabilities without the Fortune 500 overhead.
+                    ROI positive within 90 days.
                 </p>
             </div>
             
@@ -1857,9 +1719,9 @@
                         <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
                     </svg>
                 </div>
-                <h3 class="feature-title">2-Week Integration</h3>
+                <h3 class="feature-title">60-Day Integration</h3>
                 <p class="feature-description">
-                    Native connectors for SAP, Oracle, NetSuite. No disruption to your workflow. 
+                    Seamless setup with no disruption to your workflow.
                     Start saving immediately.
                 </p>
             </div>
@@ -1873,7 +1735,7 @@
             
             <div class="comparison-grid">
                 <div class="comparison-col">
-                    <div class="comparison-header">KlearNow & Others</div>
+                    <div class="comparison-header">CargoWise & KlearNow</div>
                     <div class="comparison-item">Built for daily shippers</div>
                     <div class="comparison-item">Freight forwarder focus</div>
                     <div class="comparison-item">High volume required</div>
@@ -1885,7 +1747,7 @@
                     <div class="comparison-header">Customs Edge™</div>
                     <div class="comparison-item">Built for 5-10x/year</div>
                     <div class="comparison-item">Direct enterprise focus</div>
-                    <div class="comparison-item">Perfect for 250-3K manifests</div>
+                    <div class="comparison-item">Perfect for 100-300 manifests</div>
                     <div class="comparison-item">Entertainment-specialized</div>
                     <div class="comparison-item">2-week deployment</div>
                 </div>
@@ -1905,9 +1767,9 @@
     <!-- CTA Section -->
     <section class="cta-section">
         <div class="cta-container">
-            <h2 class="cta-title">Stop Losing $360K/Year on Manual Customs</h2>
+            <h2 class="cta-title">Stop Losing Hours on Manual Customs</h2>
             <p class="cta-subtitle">
-                Join entertainment companies saving 4,800 hours annually.<br>
+                Join entertainment companies saving 600+ hours annually.<br>
                 Perfect for companies shipping internationally 5-10 times per year.
             </p>
             
@@ -1928,8 +1790,9 @@
             </div>
             
             <div class="roi-highlight">
-                <span>💰</span>
-                <span>3.6x ROI Year 1 • 5x+ Ongoing • 2-Week Implementation</span>
+                <span>✓ 93% time reduction</span>
+                <span>✓ 60-day implementation</span>
+                <span>✓ ROI positive in 90 days</span>
             </div>
         </div>
     </section>
@@ -2270,9 +2133,14 @@
                             const value = parseInt(text.replace(/,/g, ''));
                             animateValue(entry.target, 0, value, 2000);
                         } else {
-                            const value = parseInt(text);
-                            if (!isNaN(value)) {
-                                animateValue(entry.target, 0, value, 2000);
+                            // Extract number and suffix (e.g., "93%" -> 93, "%")
+                            const match = text.match(/^([\d.]+)(.*)$/);
+                            if (match) {
+                                const value = parseFloat(match[1]);
+                                const suffix = match[2] || '';
+                                if (!isNaN(value)) {
+                                    animateValue(entry.target, 0, value, 2000, suffix);
+                                }
                             }
                         }
                     }
