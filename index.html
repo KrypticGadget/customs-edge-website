@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customs Edge™ - Built for Companies Shipping 5-10x Internationally | Entertainment & Live Events</title>
-    <meta name="description" content="The only customs platform built for intermittent international shippers. Perfect for entertainment & live events shipping 5-10 times per year. From 4 hours to 15 minutes per manifest.">
+    <title>Customs Edge™ - Built for Companies Shipping 5-20x Internationally | Entertainment & Live Events</title>
+    <meta name="description" content="The only customs platform built for intermittent international shippers. Perfect for entertainment & live events shipping 5-20 times per year. From 4 hours to 30 minutes per manifest.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
@@ -15,18 +15,18 @@
     <link rel="icon" type="image/png" sizes="192x192" href="assets/logos/favicon/favicon-192x192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/logos/favicon/apple-touch-icon.png">
     <link rel="manifest" href="assets/logos/favicon/site.webmanifest">
-    <meta name="theme-color" content="#6366f1">
+    <meta name="theme-color" content="#813bf5">
     
     <!-- SEO & Social Media Meta Tags -->
-    <meta property="og:title" content="Customs Edge™ - Built for Companies Shipping 5-10x Internationally">
-    <meta property="og:description" content="The only customs platform built for intermittent international shippers. Perfect for entertainment & live events shipping 5-10 times per year. From 4 hours to 15 minutes per manifest.">
+    <meta property="og:title" content="Customs Edge™ - Built for Companies Shipping 5-20x Internationally">
+    <meta property="og:description" content="The only customs platform built for intermittent international shippers. Perfect for entertainment & live events shipping 5-20 times per year. From 4 hours to 30 minutes per manifest.">
     <meta property="og:image" content="https://customsedge.com/assets/logos/social/og-image.png">
     <meta property="og:url" content="https://customsedge.com">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Customs Edge">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://customsedge.com/assets/logos/social/og-image.png">
-    <meta name="twitter:title" content="Customs Edge™ - Built for Companies Shipping 5-10x Internationally">
+    <meta name="twitter:title" content="Customs Edge™ - Built for Companies Shipping 5-20x Internationally">
     <meta name="twitter:description" content="Save 600+ hours annually on customs processing. 93% time reduction. Perfect for entertainment & live events.">
     
     <!-- Preload Critical Assets -->
@@ -39,7 +39,7 @@
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
       "name": "Customs Edge",
-      "description": "Customs platform built for companies shipping internationally 5-10 times per year",
+      "description": "Customs platform built for companies shipping internationally 5-20 times per year",
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "Web",
       "offers": {
@@ -63,24 +63,24 @@
         }
 
         :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --primary-light: #8b5cf6;
-            --secondary: #0ea5e9;
-            --accent: #10b981;
+            --primary: #813bf5;
+            --primary-dark: #212121;
+            --primary-light: #a4c7ee;
+            --secondary: #a4c7ee;
+            --accent: #813bf5;
             --warning: #f59e0b;
             --danger: #ef4444;
-            --dark: #1f2937;
-            --text-dark: #111827;
-            --text-gray: #6b7280;
-            --light: #ffffff;
-            --light-gray: #f3f4f6;
-            --border: #e5e7eb;
-            --gradient-brand: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-            --gradient-blue: linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%);
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --dark: #212121;
+            --text-dark: #ffffff;
+            --text-gray: #a0a0a0;
+            --light: #212121;
+            --light-gray: #2a2a2a;
+            --border: #404040;
+            --gradient-brand: linear-gradient(135deg, #B76FFA 0%, #11CCFF 100%);
+            --gradient-blue: linear-gradient(135deg, #a4c7ee 0%, #813bf5 100%);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
         }
 
         html, body {
@@ -103,24 +103,28 @@
             left: 0;
             width: 100%;
             height: 100vh;
-            background: #000;
+            background: #212121;
             z-index: 10000;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: opacity 1s ease-out;
+            transition: opacity 0.5s ease-out;
         }
-        
+
         .splash-screen.fade-out {
             opacity: 0;
             pointer-events: none;
         }
-        
-        .splash-screen video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center center;
+
+        .splash-logo {
+            max-width: 300px;
+            height: auto;
+            animation: logoFadeIn 0.8s ease-out;
+        }
+
+        @keyframes logoFadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
         }
         
         /* Main Content Hidden Initially */
@@ -135,7 +139,7 @@
             visibility: visible;
         }
         
-        /* Clean Background */
+        /* Clean Background with Gradient Mesh */
         .bg-pattern {
             position: fixed;
             width: 100vw;
@@ -144,9 +148,12 @@
             left: 0;
             z-index: -1;
             background-color: var(--light);
-            background-image: 
-                radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.03) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.03) 0%, transparent 50%);
+            background-image:
+                url('brand-assets/patterns/pattern-dark.png'),
+                radial-gradient(ellipse at 20% 80%, rgba(183, 111, 250, 0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(17, 204, 255, 0.06) 0%, transparent 50%);
+            background-size: 200px 200px, cover, cover;
+            background-repeat: repeat, no-repeat, no-repeat;
         }
 
         /* Navigation */
@@ -156,7 +163,7 @@
             top: 0;
             z-index: 1000;
             padding: 16px 40px;
-            background: rgba(255, 255, 255, 0.98);
+            background: rgba(33, 33, 33, 0.95);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border);
             box-shadow: var(--shadow-sm);
@@ -232,10 +239,10 @@
             align-items: center;
             gap: 8px;
             padding: 8px 16px;
-            background: rgba(99, 102, 241, 0.1);
-            border: 1px solid rgba(99, 102, 241, 0.3);
+            background: linear-gradient(135deg, rgba(183, 111, 250, 0.15) 0%, rgba(17, 204, 255, 0.15) 100%);
+            border: 1px solid rgba(183, 111, 250, 0.4);
             border-radius: 50px;
-            color: var(--primary);
+            color: #B76FFA;
             font-size: 12px;
             font-weight: 600;
             text-transform: uppercase;
@@ -250,75 +257,43 @@
             justify-content: center;
             padding: 120px 40px 80px;
             position: relative;
+            background-color: #212121;
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             background-attachment: fixed;
-            /* Default: Standard Desktop */
-            background-image: url('assets/logos/backgrounds/Final/hero-bg-desktop.png');
+            /* Dark theme hero background with gradient overlay */
+            background-image:
+                linear-gradient(135deg, rgba(183, 111, 250, 0.08) 0%, rgba(17, 204, 255, 0.08) 100%),
+                url('brand-assets/hero-images/desktop-dark.png');
         }
-        
-        /* 2K/4K Displays - Ultra High Resolution */
-        @media (min-width: 2560px) {
+
+        /* Desktop Displays */
+        @media (min-width: 1024px) {
             .hero {
-                background-image: url('assets/logos/backgrounds/Final/hero-bg-desktop-2k.png');
+                background-image:
+                    linear-gradient(135deg, rgba(183, 111, 250, 0.08) 0%, rgba(17, 204, 255, 0.08) 100%),
+                    url('brand-assets/hero-images/desktop-dark.png');
             }
         }
-        
-        /* Standard Desktop - Full HD */
-        @media (min-width: 1920px) and (max-width: 2559px) {
-            .hero {
-                background-image: url('assets/logos/backgrounds/Final/hero-bg-desktop.png');
-            }
-        }
-        
-        /* Laptop Displays */
-        @media (min-width: 1024px) and (max-width: 1919px) {
-            .hero {
-                background-image: url('assets/logos/backgrounds/Final/hero-bg-desktop-laptop.png');
-            }
-        }
-        
+
         /* Tablet Displays */
         @media (min-width: 768px) and (max-width: 1023px) {
             .hero {
-                background-image: url('assets/logos/backgrounds/Final/hero-bg-mobile-tablet.png');
+                background-image:
+                    linear-gradient(135deg, rgba(183, 111, 250, 0.1) 0%, rgba(17, 204, 255, 0.1) 100%),
+                    url('brand-assets/hero-images/tablet-dark.png');
                 background-attachment: scroll;
             }
         }
-        
-        /* Mobile Landscape - Horizontal Orientation */
-        @media (min-width: 568px) and (max-width: 767px) and (orientation: landscape) {
+
+        /* Mobile Displays */
+        @media (max-width: 767px) {
             .hero {
-                background-image: url('assets/logos/backgrounds/Final/hero-bg-mobile-landscape.png');
+                background-image:
+                    linear-gradient(135deg, rgba(183, 111, 250, 0.1) 0%, rgba(17, 204, 255, 0.1) 100%),
+                    url('brand-assets/hero-images/mobile-dark.png');
                 background-attachment: scroll;
-                min-height: 100vh;
-            }
-        }
-        
-        /* iPhone/Standard Mobile Screens */
-        @media (min-width: 375px) and (max-width: 567px) {
-            .hero {
-                background-image: url('assets/logos/backgrounds/Final/hero-bg-mobile-iphone.png');
-                background-attachment: scroll;
-            }
-        }
-        
-        /* Small Mobile/Default Mobile */
-        @media (max-width: 374px) {
-            .hero {
-                background-image: url('assets/logos/backgrounds/Final/hero-bg-mobile.png');
-                background-attachment: scroll;
-            }
-        }
-        
-        /* High DPI/Retina Display Support */
-        @media (-webkit-min-device-pixel-ratio: 2), 
-               (min-resolution: 192dpi) {
-            @media (min-width: 1920px) {
-                .hero {
-                    background-image: url('assets/logos/backgrounds/Final/hero-bg-desktop-2k.png');
-                }
             }
         }
         
@@ -367,6 +342,10 @@
 
         .hero-text {
             animation: fadeInUp 0.8s ease-out;
+            background: rgba(33, 33, 33, 0.7);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
         }
 
         @keyframes fadeInUp {
@@ -384,11 +363,11 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(99, 102, 241, 0.1);
-            border: 1px solid rgba(99, 102, 241, 0.2);
+            background: linear-gradient(135deg, rgba(183, 111, 250, 0.15) 0%, rgba(17, 204, 255, 0.15) 100%);
+            border: 1px solid rgba(183, 111, 250, 0.3);
             padding: 8px 16px;
             border-radius: 50px;
-            color: var(--primary);
+            color: #B76FFA;
             font-size: 14px;
             font-weight: 500;
             margin-bottom: 24px;
@@ -416,24 +395,25 @@
             line-height: 1.1;
             margin-bottom: 24px;
             color: var(--text-dark);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
         .highlight-box {
-            background: rgba(99, 102, 241, 0.05);
-            border-left: 3px solid var(--primary);
+            background: linear-gradient(135deg, rgba(183, 111, 250, 0.08) 0%, rgba(17, 204, 255, 0.05) 100%);
+            border-left: 3px solid #B76FFA;
             padding: 20px;
             margin-bottom: 30px;
             border-radius: 8px;
         }
 
         .highlight-text {
-            color: var(--text-dark);
+            color: #e0e0e0;
             font-size: 18px;
             line-height: 1.6;
         }
 
         .highlight-text strong {
-            color: var(--primary);
+            color: #B76FFA;
             font-weight: 600;
         }
 
@@ -464,13 +444,14 @@
         .subtitle {
             font-size: 20px;
             line-height: 1.6;
-            color: var(--text-gray);
+            color: #d0d0d0;
             margin-bottom: 40px;
             font-weight: 400;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
         }
 
         .subtitle strong {
-            color: var(--text-dark);
+            color: #ffffff;
             font-weight: 600;
         }
 
@@ -500,7 +481,8 @@
         }
 
         .waitlist-form input[type="email"]:focus {
-            border-color: var(--primary);
+            border-color: #B76FFA;
+            box-shadow: 0 0 0 2px rgba(183, 111, 250, 0.2);
         }
 
         .waitlist-form input[type="email"]::placeholder {
@@ -538,7 +520,7 @@
 
         .submit-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 10px 30px rgba(183, 111, 250, 0.4);
         }
 
         /* Stats */
@@ -695,8 +677,8 @@
 
         .qualification-card:hover {
             transform: translateY(-3px);
-            border-color: var(--primary);
-            box-shadow: var(--shadow-md);
+            border-color: #B76FFA;
+            box-shadow: 0 6px 25px rgba(183, 111, 250, 0.2);
         }
 
         .qualification-icon {
@@ -718,7 +700,10 @@
         .qualification-number {
             font-size: 20px;
             font-weight: 700;
-            color: var(--primary);
+            background: var(--gradient-brand);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .qualification-desc {
@@ -746,15 +731,15 @@
         }
 
         .industry-item:hover {
-            background: rgba(99, 102, 241, 0.05);
-            border-color: rgba(99, 102, 241, 0.2);
+            background: linear-gradient(135deg, rgba(183, 111, 250, 0.08) 0%, rgba(17, 204, 255, 0.05) 100%);
+            border-color: rgba(183, 111, 250, 0.3);
             transform: translateX(5px);
         }
 
         .industry-icon {
             width: 24px;
             height: 24px;
-            color: var(--primary);
+            color: #B76FFA;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -774,9 +759,14 @@
         .features {
             padding: 120px 40px;
             position: relative;
-            background-image: 
-                radial-gradient(circle at 25% 25%, rgba(99, 102, 241, 0.02) 0%, transparent 50%),
-                radial-gradient(circle at 75% 75%, rgba(139, 92, 246, 0.02) 0%, transparent 50%);
+            background-color: var(--light);
+            background-image:
+                url('brand-assets/backgrounds/gradient-mesh-1.png'),
+                radial-gradient(ellipse at 25% 25%, rgba(183, 111, 250, 0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at 75% 75%, rgba(17, 204, 255, 0.05) 0%, transparent 50%);
+            background-size: cover, cover, cover;
+            background-position: center;
+            background-blend-mode: overlay, normal, normal;
         }
 
         .section-header {
@@ -789,11 +779,11 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(14, 165, 233, 0.1);
-            border: 1px solid rgba(14, 165, 233, 0.3);
+            background: linear-gradient(135deg, rgba(183, 111, 250, 0.15) 0%, rgba(17, 204, 255, 0.15) 100%);
+            border: 1px solid rgba(17, 204, 255, 0.4);
             padding: 8px 16px;
             border-radius: 50px;
-            color: #38bdf8;
+            color: #11CCFF;
             font-size: 12px;
             font-weight: 600;
             text-transform: uppercase;
@@ -852,8 +842,8 @@
 
         .feature-card:hover {
             transform: translateY(-5px);
-            border-color: var(--primary);
-            box-shadow: var(--shadow-lg);
+            border-color: #B76FFA;
+            box-shadow: 0 10px 40px rgba(183, 111, 250, 0.2);
         }
 
         .feature-icon {
@@ -924,10 +914,10 @@
         }
 
         .comparison-col.highlighted {
-            border-color: var(--primary);
-            background: rgba(99, 102, 241, 0.05);
+            border-color: #B76FFA;
+            background: linear-gradient(135deg, rgba(183, 111, 250, 0.1) 0%, rgba(17, 204, 255, 0.05) 100%);
             transform: scale(1.05);
-            box-shadow: var(--shadow-md);
+            box-shadow: 0 0 30px rgba(183, 111, 250, 0.2);
         }
 
         .comparison-header {
@@ -938,7 +928,10 @@
         }
 
         .comparison-col.highlighted .comparison-header {
-            color: var(--primary);
+            background: var(--gradient-brand);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .comparison-item {
@@ -956,17 +949,22 @@
         .cta-section {
             padding: 120px 40px;
             position: relative;
-            background-image: 
-                radial-gradient(ellipse at top, rgba(99, 102, 241, 0.03) 0%, transparent 70%),
-                radial-gradient(ellipse at bottom, rgba(139, 92, 246, 0.03) 0%, transparent 70%);
+            background-color: var(--light);
+            background-image:
+                url('brand-assets/backgrounds/gradient-mesh-2.png'),
+                radial-gradient(ellipse at top, rgba(183, 111, 250, 0.06) 0%, transparent 70%),
+                radial-gradient(ellipse at bottom, rgba(17, 204, 255, 0.06) 0%, transparent 70%);
+            background-size: cover, cover, cover;
+            background-position: center;
+            background-blend-mode: overlay, normal, normal;
         }
 
         .cta-container {
             max-width: 900px;
             margin: 0 auto;
             text-align: center;
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
-            border: 1px solid rgba(99, 102, 241, 0.2);
+            background: linear-gradient(135deg, rgba(183, 111, 250, 0.08) 0%, rgba(17, 204, 255, 0.08) 100%);
+            border: 1px solid rgba(183, 111, 250, 0.3);
             border-radius: 30px;
             padding: 80px 60px;
             position: relative;
@@ -981,7 +979,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.05) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(183, 111, 250, 0.08) 0%, transparent 70%);
             animation: rotate 20s linear infinite;
             z-index: 0;
             pointer-events: none;
@@ -1021,12 +1019,12 @@
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            background: rgba(99, 102, 241, 0.1);
-            border: 1px solid rgba(99, 102, 241, 0.3);
+            background: linear-gradient(135deg, rgba(183, 111, 250, 0.15) 0%, rgba(17, 204, 255, 0.15) 100%);
+            border: 1px solid rgba(183, 111, 250, 0.4);
             padding: 12px 24px;
             border-radius: 50px;
             margin-top: 20px;
-            color: var(--primary);
+            color: #B76FFA;
             font-weight: 600;
         }
 
@@ -1128,7 +1126,7 @@
         }
 
         .footer-section a:hover {
-            color: var(--primary);
+            color: #B76FFA;
         }
 
         .footer-social {
@@ -1151,8 +1149,8 @@
         }
 
         .social-link:hover {
-            background: var(--primary);
-            border-color: var(--primary);
+            background: var(--gradient-brand);
+            border-color: #B76FFA;
             color: white;
             transform: translateY(-3px);
         }
@@ -1179,7 +1177,7 @@
         }
 
         .footer-legal a:hover {
-            color: var(--primary);
+            color: #11CCFF;
         }
 
         @media (max-width: 968px) {
@@ -1351,11 +1349,9 @@
         <input type="email" name="email" />
     </form>
     
-    <!-- Splash Screen Video -->
+    <!-- Splash Screen Logo -->
     <div id="splash-screen" class="splash-screen">
-        <video id="splash-video" muted autoplay playsinline>
-            <source src="" type="video/mp4">
-        </video>
+        <img id="splash-logo" src="assets/logos/svg/logo-horizontal-simple.png" alt="Customs Edge" class="splash-logo">
     </div>
     
     <!-- Main Website Content -->
@@ -1367,7 +1363,7 @@
     <nav>
         <div class="nav-container">
             <div class="logo">
-                <img src="assets/logos/svg/logo-horizontal-simple.svg"
+                <img src="assets/logos/svg/logo-horizontal-simple.png"
                      alt="Customs Edge - Customs platform for intermittent international shippers"
                      class="logo-img"
                      width="180"
@@ -1375,7 +1371,7 @@
             </div>
             <div class="nav-cta">
                 <div class="target-badge">
-                    <span>For 5-10x/Year Shippers</span>
+                    <span>For 5-20x/Year Shippers</span>
                 </div>
             </div>
         </div>
@@ -1385,7 +1381,7 @@
     <section class="hero">
         <!-- Brand Watermark -->
         <div class="hero-watermark">
-            <img src="assets/logos/svg/monogram-simple.svg" alt="" aria-hidden="true">
+            <img src="assets/logos/svg/monogram-simple.png" alt="" aria-hidden="true">
         </div>
         
         <div class="hero-content">
@@ -1399,17 +1395,21 @@
                     <span>Built for Intermittent International Shippers</span>
                 </div>
                 
-                <h1>Ship 5-10 Times Per Year?<br>You're Our Sweet Spot.</h1>
-                
+                <h1>Ship 5-20 Times Per Year?<br>You're Our Sweet Spot.</h1>
+
+                <p class="value-prop-tagline" style="font-size: 24px; color: #B76FFA; font-weight: 600; margin-bottom: 24px; font-style: italic;">
+                    "Give me your mess. I'll give you a manifest."
+                </p>
+
                 <div class="highlight-box">
                     <p class="highlight-text">
-                        You ship <strong>too often</strong> to ignore efficiency (100-300 manifests/year)<br>
+                        You ship <strong>too often</strong> to ignore efficiency ($1M-$50M in equipment)<br>
                         But <strong>not often enough</strong> to justify a $150K+ customs expert
                     </p>
                 </div>
 
                 <p class="subtitle">
-                    <strong>Entertainment companies, concert tours, sports leagues, conferences</strong>—if you ship internationally 5-10 times per year, you're losing thousands of hours on inefficient customs processing. We fix that in 2 weeks.
+                    <strong>Entertainment companies, concert tours, sports leagues, broadcast</strong>—if you ship internationally 5-20 times per year, you're losing thousands of hours on inefficient customs processing. We fix that.
                 </p>
 
                 <!-- Netlify Form with data-netlify attribute -->
@@ -1431,23 +1431,23 @@
 
                 <div class="stats">
                     <div class="stat">
-                        <div class="stat-number">160</div>
-                        <div class="stat-label">Avg Manifests/Client</div>
+                        <div class="stat-number">4hrs→30min</div>
+                        <div class="stat-label">Per Manifest</div>
                     </div>
                     <div class="stat">
-                        <div class="stat-number">600</div>
-                        <div class="stat-label">Hours Saved/Year</div>
+                        <div class="stat-number">95%+</div>
+                        <div class="stat-label">Classification Accuracy</div>
                     </div>
                     <div class="stat">
-                        <div class="stat-number">93%</div>
-                        <div class="stat-label">Time Reduction</div>
+                        <div class="stat-number">Same Day</div>
+                        <div class="stat-label">Turnaround</div>
                     </div>
                 </div>
             </div>
 
             <div class="hero-visual">
                 <div class="demo-video-container">
-                    <video id="demo-video" class="demo-video" controls poster="assets/logos/social/og-image.png">
+                    <video id="demo-video" class="demo-video" controls>
                         <source src="Customs_Edge_Simple_Demo_Final_Cut.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
@@ -1479,8 +1479,8 @@
                         </svg>
                     </div>
                     <div class="qualification-text">
-                        <div class="qualification-number">5-10x</div>
-                        <div class="qualification-desc">International shipments per year</div>
+                        <div class="qualification-number">5-20</div>
+                        <div class="qualification-desc">International events per year</div>
                     </div>
                 </div>
                 <div class="qualification-card">
@@ -1545,6 +1545,18 @@
                     <div class="qualification-text">
                         <div class="qualification-number">Zero</div>
                         <div class="qualification-desc">Tolerance for delays</div>
+                    </div>
+                </div>
+                <div class="qualification-card">
+                    <div class="qualification-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                        </svg>
+                    </div>
+                    <div class="qualification-text">
+                        <div class="qualification-number">$1M-$50M</div>
+                        <div class="qualification-desc">Equipment value</div>
                     </div>
                 </div>
             </div>
@@ -1630,6 +1642,107 @@
         </div>
     </section>
 
+    <!-- How It Works Section -->
+    <section class="how-it-works" style="padding: 100px 40px; background: var(--light);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div class="section-header">
+                <div class="section-badge">Simple Process</div>
+                <h2>How It Works</h2>
+                <p class="section-subtitle">From chaos to customs-ready in three steps</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 60px;">
+                <div style="text-align: center; padding: 30px;">
+                    <div style="width: 80px; height: 80px; background: var(--gradient-brand); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 32px; font-weight: 700; color: white;">1</div>
+                    <h3 style="font-size: 24px; margin-bottom: 16px; color: var(--text-dark);">Send Us The Mess</h3>
+                    <p style="color: var(--text-gray); line-height: 1.6;">Email, Excel, partial lists, whatever you have. We accept messy data, typos, abbreviations, and last-minute changes.</p>
+                </div>
+                <div style="text-align: center; padding: 30px;">
+                    <div style="width: 80px; height: 80px; background: var(--gradient-brand); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 32px; font-weight: 700; color: white;">2</div>
+                    <h3 style="font-size: 24px; margin-bottom: 16px; color: var(--text-dark);">We Process It</h3>
+                    <p style="color: var(--text-gray); line-height: 1.6;">Parse, enrich, and classify with full 10-digit HTS codes. Our AI handles broadcast, production, medical, and touring equipment.</p>
+                </div>
+                <div style="text-align: center; padding: 30px;">
+                    <div style="width: 80px; height: 80px; background: var(--gradient-brand); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 32px; font-weight: 700; color: white;">3</div>
+                    <h3 style="font-size: 24px; margin-bottom: 16px; color: var(--text-dark);">You Get A Manifest</h3>
+                    <p style="color: var(--text-gray); line-height: 1.6;">Export-ready, broker-formatted documentation. HTS manifests, commercial invoices, and carnet general lists — same day.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What We Accept / What You Get Section -->
+    <section style="padding: 100px 40px; background: var(--light-gray); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 60px;">
+
+                <!-- What We Accept -->
+                <div>
+                    <h3 style="font-size: 28px; color: var(--text-dark); margin-bottom: 30px; display: flex; align-items: center; gap: 12px;">
+                        <span style="width: 40px; height: 40px; background: var(--gradient-brand); border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                        </span>
+                        What We Accept
+                    </h3>
+                    <div style="display: flex; flex-direction: column; gap: 16px;">
+                        <div style="display: flex; align-items: flex-start; gap: 12px; padding: 16px; background: var(--light); border-radius: 12px; border: 1px solid var(--border);">
+                            <span style="color: #10b981; font-size: 18px;">✓</span>
+                            <div><strong style="color: var(--text-dark);">Email forwards</strong><br><span style="color: var(--text-gray); font-size: 14px;">"Dave says truck 3 has the broadcast stuff"</span></div>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; gap: 12px; padding: 16px; background: var(--light); border-radius: 12px; border: 1px solid var(--border);">
+                            <span style="color: #10b981; font-size: 18px;">✓</span>
+                            <div><strong style="color: var(--text-dark);">Messy Excel</strong><br><span style="color: var(--text-gray); font-size: 14px;">47 rows, inconsistent formatting, merged cells</span></div>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; gap: 12px; padding: 16px; background: var(--light); border-radius: 12px; border: 1px solid var(--border);">
+                            <span style="color: #10b981; font-size: 18px;">✓</span>
+                            <div><strong style="color: var(--text-dark);">Partial lists & abbreviations</strong><br><span style="color: var(--text-gray); font-size: 14px;">"3x FX9, 2x C500, ARRI kit, the usual"</span></div>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; gap: 12px; padding: 16px; background: var(--light); border-radius: 12px; border: 1px solid var(--border);">
+                            <span style="color: #10b981; font-size: 18px;">✓</span>
+                            <div><strong style="color: var(--text-dark);">Typos & internal jargon</strong><br><span style="color: var(--text-gray); font-size: 14px;">"Sachler tripod", "Package A", "the octagon rig"</span></div>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; gap: 12px; padding: 16px; background: var(--light); border-radius: 12px; border: 1px solid var(--border);">
+                            <span style="color: #10b981; font-size: 18px;">✓</span>
+                            <div><strong style="color: var(--text-dark);">Last-minute changes</strong><br><span style="color: var(--text-gray); font-size: 14px;">"+2 cameras, remove the spare lens kit"</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- What You Get -->
+                <div>
+                    <h3 style="font-size: 28px; color: var(--text-dark); margin-bottom: 30px; display: flex; align-items: center; gap: 12px;">
+                        <span style="width: 40px; height: 40px; background: var(--gradient-brand); border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        </span>
+                        What You Get
+                    </h3>
+                    <div style="display: flex; flex-direction: column; gap: 16px;">
+                        <div style="display: flex; align-items: flex-start; gap: 12px; padding: 16px; background: linear-gradient(135deg, rgba(183, 111, 250, 0.1) 0%, rgba(17, 204, 255, 0.05) 100%); border-radius: 12px; border: 1px solid rgba(183, 111, 250, 0.3);">
+                            <span style="color: #B76FFA; font-size: 18px;">📄</span>
+                            <div><strong style="color: var(--text-dark);">HTS Manifest</strong><br><span style="color: var(--text-gray); font-size: 14px;">CSV, Excel, or PDF — full 10-digit codes with duty rates</span></div>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; gap: 12px; padding: 16px; background: linear-gradient(135deg, rgba(183, 111, 250, 0.1) 0%, rgba(17, 204, 255, 0.05) 100%); border-radius: 12px; border: 1px solid rgba(183, 111, 250, 0.3);">
+                            <span style="color: #B76FFA; font-size: 18px;">🧾</span>
+                            <div><strong style="color: var(--text-dark);">Commercial Invoice</strong><br><span style="color: var(--text-gray); font-size: 14px;">Broker-ready format with all required fields</span></div>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; gap: 12px; padding: 16px; background: linear-gradient(135deg, rgba(183, 111, 250, 0.1) 0%, rgba(17, 204, 255, 0.05) 100%); border-radius: 12px; border: 1px solid rgba(183, 111, 250, 0.3);">
+                            <span style="color: #B76FFA; font-size: 18px;">📋</span>
+                            <div><strong style="color: var(--text-dark);">Carnet General List</strong><br><span style="color: var(--text-gray); font-size: 14px;">Boomerang/Roanoke compatible format</span></div>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; gap: 12px; padding: 16px; background: linear-gradient(135deg, rgba(183, 111, 250, 0.1) 0%, rgba(17, 204, 255, 0.05) 100%); border-radius: 12px; border: 1px solid rgba(183, 111, 250, 0.3);">
+                            <span style="color: #B76FFA; font-size: 18px;">⚡</span>
+                            <div><strong style="color: var(--text-dark);">Same-Day Turnaround</strong><br><span style="color: var(--text-gray); font-size: 14px;">Export-ready documentation, typically within hours</span></div>
+                        </div>
+                        <div style="display: flex; align-items: flex-start; gap: 12px; padding: 16px; background: linear-gradient(135deg, rgba(183, 111, 250, 0.1) 0%, rgba(17, 204, 255, 0.05) 100%); border-radius: 12px; border: 1px solid rgba(183, 111, 250, 0.3);">
+                            <span style="color: #B76FFA; font-size: 18px;">🎯</span>
+                            <div><strong style="color: var(--text-dark);">95%+ Accuracy</strong><br><span style="color: var(--text-gray); font-size: 14px;">Classifications validated against CBP rulings</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Features Section -->
     <section class="features">
         <div class="section-header">
@@ -1637,7 +1750,7 @@
             <h2>Designed for Irregular but Critical Shipments</h2>
             <p class="section-subtitle">
                 Unlike freight forwarder tools built for daily shippers, we're optimized for your
-                5-10 annual international events where every manifest matters.
+                5-20 annual international events where every manifest matters.
             </p>
         </div>
 
@@ -1665,7 +1778,7 @@
                 </div>
                 <h3 class="feature-title">Zero Learning Curve</h3>
                 <p class="feature-description">
-                    Built for teams who ship 5-10x per year. No training needed. 
+                    Built for teams who ship 5-20x per year. No training needed.
                     Template library from previous events. Works instantly.
                 </p>
             </div>
@@ -1745,7 +1858,7 @@
                 
                 <div class="comparison-col highlighted">
                     <div class="comparison-header">Customs Edge™</div>
-                    <div class="comparison-item">Built for 5-10x/year</div>
+                    <div class="comparison-item">Built for 5-20x/year</div>
                     <div class="comparison-item">Direct enterprise focus</div>
                     <div class="comparison-item">Perfect for 100-300 manifests</div>
                     <div class="comparison-item">Entertainment-specialized</div>
@@ -1770,7 +1883,7 @@
             <h2 class="cta-title">Stop Losing Hours on Manual Customs</h2>
             <p class="cta-subtitle">
                 Join entertainment companies saving 600+ hours annually.<br>
-                Perfect for companies shipping internationally 5-10 times per year.
+                Perfect for companies shipping internationally 5-20 times per year.
             </p>
             
             <form class="waitlist-form" name="waitlist-cta" action="/success" method="POST" data-netlify="true" netlify-honeypot="bot-field-cta" style="max-width: 500px; margin: 0 auto;">
@@ -1801,10 +1914,15 @@
     <footer>
         <div class="footer-container">
             <div class="footer-brand">
-                <img src="assets/logos/svg/monogram-simple.svg" alt="Customs Edge" class="footer-logo">
+                <img src="assets/logos/svg/monogram-simple.png" alt="Customs Edge" class="footer-logo">
                 <div class="footer-info">
                     <h4 class="footer-title">Customs Edge™</h4>
-                    <p class="footer-tagline">Purpose-Built for Companies Shipping 5-10x Internationally</p>
+                    <p class="footer-tagline">Purpose-Built for Companies Shipping 5-20x Internationally</p>
+                    <p style="font-size: 13px; color: var(--text-gray); margin-top: 12px;">
+                        <strong style="color: var(--text-dark);">Zachary Gillett</strong>, CEO<br>
+                        <a href="mailto:zackgillett@customsedge.com" style="color: #B76FFA;">zackgillett@customsedge.com</a><br>
+                        San Diego, CA
+                    </p>
                 </div>
             </div>
             
@@ -2019,84 +2137,34 @@
                 observer.observe(card);
             });
 
-            // Splash Screen Video Implementation
-            function initSplashVideo() {
+            // Splash Screen Logo Fade-In
+            function initSplashScreen() {
                 const splashScreen = document.getElementById('splash-screen');
-                const splashVideo = document.getElementById('splash-video');
                 const mainContent = document.getElementById('main-content');
-                
-                if (!splashScreen || !splashVideo || !mainContent) return;
-                
-                // Determine which video to load based on device
-                let videoSrc = 'assets/video/splash-entry.mp4'; // Default desktop
-                
-                const width = window.innerWidth;
-                const height = window.innerHeight;
-                const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-                
-                if (isMobile || width <= 768) {
-                    // Mobile device detected
-                    if (height > width) {
-                        // Portrait orientation
-                        videoSrc = 'assets/video/splash-entry-mobile-portrait.mp4';
-                    } else if (width / height > 1.5) {
-                        // Landscape orientation
-                        videoSrc = 'assets/video/splash-entry-mobile-landscape.mp4';
-                    } else {
-                        // Square-ish or tablet
-                        videoSrc = 'assets/video/splash-entry-mobile-square.mp4';
-                    }
-                }
-                
+
+                if (!splashScreen || !mainContent) return;
+
                 // Function to hide splash and show main content
                 function showMainContent() {
                     splashScreen.classList.add('fade-out');
                     mainContent.classList.remove('main-content-hidden');
                     mainContent.classList.add('main-content-visible');
-                    
+
                     // Remove splash screen from DOM after fade
                     setTimeout(() => {
                         splashScreen.style.display = 'none';
-                    }, 1000);
+                    }, 500);
                 }
-                
-                // Set video source
-                splashVideo.src = videoSrc;
-                
-                // Video ended event
-                splashVideo.addEventListener('ended', showMainContent);
-                
-                
-                // Fallback: If video fails to load or play
-                splashVideo.addEventListener('error', () => {
-                    console.log('Video failed to load, showing content');
-                    showMainContent();
-                });
-                
-                // Try to play the video
-                const playPromise = splashVideo.play();
-                
-                if (playPromise !== undefined) {
-                    playPromise.catch(error => {
-                        console.log('Autoplay failed:', error);
-                        // If autoplay fails, show content immediately
-                        showMainContent();
-                    });
-                }
-                
-                // Maximum splash duration (fallback)
-                setTimeout(() => {
-                    if (!mainContent.classList.contains('main-content-visible')) {
-                        showMainContent();
-                    }
-                }, 10000); // 10 seconds max
+
+                // Show logo for 1.5 seconds then fade out
+                setTimeout(showMainContent, 1500);
             }
-            
-            // Initialize splash video when DOM is ready
+
+            // Initialize splash screen when DOM is ready
             if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', initSplashVideo);
+                document.addEventListener('DOMContentLoaded', initSplashScreen);
             } else {
-                initSplashVideo();
+                initSplashScreen();
             }
             
             // Animated counter for stats
