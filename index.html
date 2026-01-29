@@ -1250,11 +1250,60 @@
         @media (max-width: 968px) {
             .hero-content {
                 grid-template-columns: 1fr;
-                gap: 60px;
+                gap: 40px;
             }
 
             .hero-visual {
-                order: -1;
+                order: 1;
+            }
+
+            .hero-text {
+                padding: 24px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            .value-prop-tagline {
+                font-size: 18px !important;
+            }
+
+            .stats {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .stat {
+                padding: 16px;
+            }
+
+            /* How It Works section mobile */
+            .how-it-works {
+                padding: 60px 20px !important;
+            }
+
+            .how-it-works > div > div:last-child {
+                grid-template-columns: 1fr !important;
+                gap: 30px !important;
+            }
+
+            /* What We Accept / What You Get mobile */
+            .accept-get-section {
+                padding: 60px 20px !important;
+            }
+
+            .accept-get-grid {
+                grid-template-columns: 1fr !important;
+                gap: 40px !important;
+            }
+
+            .accept-get-grid h3 {
+                font-size: 22px !important;
+            }
+
+            .accept-get-grid > div > div > div {
+                padding: 12px !important;
             }
 
             .features-grid {
@@ -1672,9 +1721,9 @@
     </section>
 
     <!-- What We Accept / What You Get Section -->
-    <section style="padding: 100px 40px; background: var(--light-gray); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <section class="accept-get-section" style="padding: 100px 40px; background: var(--light-gray); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
         <div style="max-width: 1200px; margin: 0 auto;">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 60px;">
+            <div class="accept-get-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 60px;">
 
                 <!-- What We Accept -->
                 <div>
